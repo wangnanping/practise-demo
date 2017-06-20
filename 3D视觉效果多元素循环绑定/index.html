@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    body {
+        color: white;
+        font-family: sans-serif;
+        font-size: 1.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content {
+        margin: 1px;
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+        /*cubic-bezier 贝塞尔曲线*/
+    }
+</style>
+
+<body>
+    <div class="wowpanel">
+        <div class="content">move</div>
+    </div>
+    <div class="wowpanel">
+        <div class="content">your</div>
+    </div>
+    <div class="wowpanel">
+        <div class="content">cursor</div>
+    </div>
+    <div class="wowpanel">
+        <div class="content">over</div>
+    </div>
+</body>
+<script>
+    const ANGLE = 45;
+
+    let wowpanels = document.querySelectorAll(".wowpanel");
+    let colors = ['#4975FB', '#924DE6', '#EF5252', '#F59500'];
+
+    wowpanels.forEach((element, i) => {
+        floatable(element, colors[i]);
+    });
+
+    function floatable(panel, color) {
+        let content = panel.querySelector(".content"); //当前元素的子节点
+        content.style.backgroundColor = color;
+
+        panel.addEventListener('mouseout', e => {
+            content.style.transform =
+                `perspective(300px) 
+                                   rotateY(0deg)
+                                   rotateX(0deg)`;
+        });
+
+        panel.addEventListener('mousemove', e => {
+            let w = panel.clientWidth; //DOM宽度
+            let h = panel.clientHeight;//DOM高度
+            let y = (e.offsetX - w * 0.5) / w * ANGLE;  //鼠标的X坐标-DOM宽度 再除以宽度除45
+            let x = (1 - (e.offsetY - h * 0.5)) / h * ANGLE;
+
+            content.style.transform =
+                `perspective(300px) 
+                                   rotateX(${x}deg)
+                                   rotateY(${y}deg)`;
+        });
+    }
+</script>
+
+</html>
