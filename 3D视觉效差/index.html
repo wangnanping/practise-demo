@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+<style>
+    .avatar {
+        width: 300px;
+        height: 300px;
+        margin: 50px auto;
+        background: url('avatar.jpg');
+        background-size: contain;
+        /*把图像图像扩展至最大尺寸，以使其宽度和高度完全适应内容区域。*/
+        transition: all .3s linear;
+        transform-origin: 50%;
+        /*旋转元素 的几点位置 transform-origin: x-axis y-axis z-axis;   X 轴的何处   Y 轴的何处 Z 轴的何处。*/
+    }
+</style>
+
+<body>
+    <div class="avatar"></div>
+</body>
+<script>
+    window.onload = function () {
+        let el = document.querySelector('.avatar')
+
+        el.addEventListener('mousemove', (e) => {
+            // getBoundingClientRect用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置。
+            // getBoundingClientRect是DOM元素到浏览器可视范围的距离（不包含文档卷起的部分）。
+            // 该函数返回一个Object对象，该对象有6个属性：top,lef,right,bottom,width,height；
+            // 这里的top、left和css中的理解很相似，width、height是元素自身的宽高，
+            // 但是right，bottom和css中的理解有点不一样。right是指元素右边界距窗口最左边的距离，
+            // bottom是指元素下边界距窗口最上面的距离。
+            let thisPX = el.getBoundingClientRect().left
+            let thisPY = el.getBoundingClientRect().top
+            let boxWidth = el.getBoundingClientRect().width
+            let boxHeight = el.getBoundingClientRect().height
+            let scrollTop = document.documentElement.scrollTop + document.body.scrollTop
+            // document.documentElement.scrollTop当前页面的滚动条纵坐标位置   document.body.scrollTop网页被卷去的高
+            let mouseX = e.pageX - thisPX
+            let mouseY = e.pageY - scrollTop - thisPY
+            let X
+            let Y
+
+            X = mouseX - boxWidth / 2
+            Y = boxHeight / 2 - mouseY
+
+            el.style.transform = `perspective(300px) rotateY(${X / 10}deg) rotateX(${Y / 10}deg)` //鼠标移入时的
+            // 目前浏览器都不支持 perspective 属性  定义 3D 元素距视图的距离   rotateX rotateY -》 X 轴 Y 轴的 3D 旋转。
+            // Chrome 和 Safari 支持替代的 -webkit-perspective 属性。
+            el.style.boxShadow = `${-X / 20}px ${Y / 20}px 50px rgba(0, 0, 0, 0.3)` //阴影
+        })
+
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = `perspective(300px) rotateY(0deg) rotateX(0deg)`
+            el.style.boxShadow = ''
+        })
+    }
+</script>
+
+</html>
