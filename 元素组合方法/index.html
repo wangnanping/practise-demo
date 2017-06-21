@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+
+
+<body>
+
+</body>
+<script>
+    var root = [
+        ['1', '2', '3'],
+        ['a', 'b', 'c'],
+        ['q', 'w', 'e'],
+        ['z', 'x', 'c']
+    ]
+    var stack = [];
+    var result = [];
+
+    function loop(list, level) {
+        level++;
+        for (var i = 0; i < list.length; i++) {
+            stack.push(list[i]);
+            if (level >= root.length) {
+                //±£´æ
+                result.push(stack.join('-'));
+                stack.pop();
+
+            } else {
+                loop(root[level], level);
+            }
+            if (i >= list.length - 1) {
+                stack.pop();
+            }
+        }
+    }
+
+    loop(root[0], 0)
+    console.log(result);
+</script>
+
+</html>
