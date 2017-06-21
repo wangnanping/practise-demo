@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+<style>
+    .list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 36px;
+        overflow: hidden;
+        border: 1px solid red;
+    }
+
+    .list li {
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+    }
+
+    .list .li_transitiong {
+        transition: all 1s;
+        margin-top: -36px;
+    }
+</style>
+
+<body>
+    <ul class="list">
+        <li>我是第一个</li>
+        <li>我是第二个</li>
+        <li>我是第三个</li>
+        <li>我是第四个</li>
+        <li>我是第五个</li>
+        <li>我是第六个</li>
+    </ul>
+</body>
+<script src="./zepto.min.js"></script>
+<script>
+    window.onload = () => {
+        setInterval( ()=> {
+            $(".list").children().first().addClass("li_transitiong");
+            setTimeout( ()=>{
+                $(".list").children().first().removeClass("li_transitiong").clone(true).appendTo(
+                    ".list");
+                $(".list").children().first().remove();
+            }, 1000);
+        }, 2000);
+    }
+</script>
+
+</html>
