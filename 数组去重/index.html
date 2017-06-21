@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+
+
+<body>
+
+</body>
+<script>
+    // 第一种方式
+    var a = [1, 1, '1', '1']
+
+    function newArrayValue(arr) {
+        var s = [];
+        for (var i = 0; i < a.length; i++) {
+            for (var j = 0; j < s.length; j++) {
+                if (a[i] === s[j]) {
+                    break;
+                }
+            }
+            //// 如果a[i]是唯一的，那么执行完循环，j等于s.length
+            if (j === s.length) {
+                s.push(a[i]);
+            }
+        }
+        return s;
+    }
+    console.log(newArrayValue(a)); //[1,'1']
+    //兼容最好
+    console.log("_____________________________________________");
+    //第二种方式 indexof
+    var array = [1, 1, '1'];
+
+    function unique(array) {
+        var res = [];
+        for (var i = 0, len = array.length; i < len; i++) {
+            var current = array[i];
+            if (res.indexOf(current) === -1) {
+                res.push(current)
+            }
+        }
+        return res;
+    }
+    console.log(unique(array)); //[1,'1']
+    console.log("_____________________________________________");
+    //第三种  //相同排一起后后去重
+    var arrtow = [1, 2, 3, 5, 6, 3, 4, 5, 2, 1];
+    var b = [20, 38, 13, 2, 4, 3];
+
+    function unique(array, b) {
+        var res = [];
+        var sortedArray = array.concat(b).sort(); //concat()组合数组  可多个，隔开  sort() 相同的排在一起
+        var seen;
+        for (var i = 0, len = sortedArray.length; i < len; i++) {
+            // 如果是第一个元素或者相邻的元素不相同
+            if (!i || seen !== sortedArray[i]) {
+                res.push(sortedArray[i])
+            }
+            seen = sortedArray[i];
+        }
+        return res;
+    }
+
+    console.log(unique(array, b)); //[1, "1", 13, 2, 20, 3, 38, 4]
+    console.log("_____________________________________________");
+    //第四种 //ES5 filter 方法
+    var arrthree = [1, 2, 3, 2, 4, 1, '1'];
+
+    function uniqueOne(array) {
+        var res = array.filter(function (item, index, array) {
+            return array.indexOf(item) === index;
+        })
+        return res;
+    }
+    console.log(uniqueOne(arrthree));
+    console.log("___________________________________________--");
+    //ES6 方法
+    var arrays = [1, 2, 1, 1, '1'];
+
+    function unique(array) {
+        return Array.from(new Set(array));
+        //简化  return [...new Set(array)];
+    }
+    //简化 var unique = (a) => [...new Set(a)]
+    console.log(unique(arrays)); // [1, 2, "1"]
+    console.log("___________________________________________--");
+    //如果使用map
+    function uniques(arr) {
+        const seen = new Map()
+        return arr.filter((a) => !seen.has(a) && seen.set(a, 1))
+    }
+    console.log(uniques(arrays));
+</script>
+
+</html>

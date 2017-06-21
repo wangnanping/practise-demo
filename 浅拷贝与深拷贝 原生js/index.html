@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+
+
+<body>
+
+</body>
+<script>
+    var chinese = {
+        name: '王南平'
+    }
+    var doctor = {
+        doctorName: "先生"
+    }
+
+    function deepCopy(p, c) {
+        var c = c || {};
+        for (var i in p) {
+            if (typeof p[i] === 'object') {
+                c[i] = (p[i].constructor === Array) ? [] : {} //constructor 指向构造
+                deepCopy(p[i], c[i]);
+            } else {
+                c[i] = p[i]
+            }
+        }
+        return c;
+    }
+    doctor = deepCopy(chinese);
+    console.log(doctor.name);
+    chinese.birthplaces = ['四川', '宜宾', '翠屏'];
+    doctor = deepCopy(chinese);
+    console.log(doctor.birthplaces);
+    doctor.birthplaces.push('凉姜');
+    console.log(doctor.birthplaces); //子对象push添加成员一枚‘凉姜’
+    console.log(chinese.birthplaces); //父对象 birthplaces 没有受到 子对象的影响发生改变
+    //总结  使用递归  实现深拷贝  使子对象继承父对象的所有属性  这里所有的属性包括（基础类型数据和引用类型的数据）
+    //与之差别的是 在浅拷贝中  看下面的例子
+
+    var newchinese = {
+        name: "王妈妈"
+    }
+    var newdoctor = {
+        newdoctorname: '乔治他妈妈'
+    }
+
+    function extenCopy(p) {
+        var c = {};
+        for (var i in p) {
+            c[i] = p[i];
+        }
+        c.uber = p;
+        return c;
+    }
+    newdoctor = extenCopy(newchinese);
+    console.log(newdoctor.name);
+    //对父对象新增一个数组
+    newchinese.birthplaces = ['四川', '成都', '高薪'];
+    newdoctor = extenCopy(newchinese);
+    console.log(newdoctor.birthplaces);
+    newdoctor.birthplaces.push('天府二街');
+    console.log(newdoctor.birthplaces); //在这里打印的是newdoctor 子对象的引用类型数据
+    console.log(newchinese.birthplaces); //发现newchinese 父对象中的 引用类型数据也发生了变化
+    //总结 这里实现的就是数据的浅拷贝  在newdoctor 继承 newchinese  发现只有基础类型的数据被拷贝了  
+    // 而引用类型的数据则是存在的内存当中 
+    //  所以在改变子对象的引用类型的数据时  这时的引用类型数据的指针是指向的父对象 所以改变子对象的引用类型的数据的时候 父对象的引用类型的数据就会发生改变
+</script>
+
+</html>
