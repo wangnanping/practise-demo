@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+</head>
+<style>
+
+</style>
+
+<body>
+
+</body>
+<script>
+    //    ES5和ES6中新增的的数组迭代方法如下：
+    //    forEach
+    //    map
+    //    filter
+    //    some
+    //    every
+    //    reduce / reduceRight
+    //    find / findIndex
+    //    find / findIndex是ES6新增的，其余都是ES5新增的
+    //    所有对低版本IE都不兼容
+    //  1.forEach
+    //forEach方法中CALLBACK函数会被依次传图三个参数：
+    // 数组当前项的值
+    // 数组当前项的索引
+    // 数组对象本身
+    // 还可以传入二个参数，callback函数里的this将指向这个参数。如果没有传入第二个参数，则this指向全局对象（在浏览器是为window），严格模式下是undefined。
+    let arr = [1, 2, 3];
+    let obj = {
+        name: 'wang'
+    };
+    arr.forEach(function (element, index, array) {
+        console.log(element, index, array, this);
+    }, obj);
+    // 1 0 Array(3) Objectname: "wang"__proto__: Object
+    // 2 1 Array(3) Objectname: "wang"__proto__: Object
+    // 3 2 Array(3) Objectname: "wang"__proto__: Object
+    // 简单列子：
+    let sum = 0;
+    arr.forEach((element, index, arr) => {
+        sum += element;
+    })
+    console.log(sum); //6
+
+    // 对低版本IE进行一下扩展
+    Array.prototype.forEach = Array.prototype.forEach || function (fn, context) {
+        for (let k = 0; k = this.length; k++) {
+            if (typeof fn === 'function' && Object.prototype.hasOwnProperty.call(this, k)) {
+                //Object.prototype.hasOwnProperty 检测一个对象是否含有特定的自身属性  call  将这个方法给forEach 判断是否支持Array.prototype.forEach
+                fn.call(context, this[k], k, this); //成功就可以遍历这个数组
+            }
+        }
+    }
+    console.log(`___________________________上面是forEach__________________________________________`);
+    //map map方法的作用就是将原数组按照一定的规则映射成一个新的数组。再将其返回，是返回一个新的数组，而不是将原数组直接改变。
+    let data = [1, 2, 3, 4];
+    let arrayOfSquares = data.map((element) => {
+        return element * element //要return 一下
+    });
+    console.log(arrayOfSquares); // [1, 4, 9, 16]
+    console.log(data);
+    //扩展兼容
+    Array.prototype.map = Array.prototype.map || function (fn, context) {
+        let arr = [];
+        if (typeof fn === 'function') {
+            for (let k = 0; k < this.length; k++) {
+                arr.push(fn.call(context, this[k], k, this));
+            }
+        }
+        return arr;
+    }
+    console.log(`___________________________上面是map__________________________________________`);
+    //filter
+    //filter为“过滤”、“筛选”的意思。指数组filter后，返回过滤后的新数组。用法和参数跟map差不多。
+    // 与map方法不同的是，filter方法的callback函数需要返回弱等于true或false的值。如果为true，则通过，否则，不通过。
+    let filterArray = [0, 1, 2, 3];
+    let newfilterArray = filterArray.filter((element, idnex, array) => {
+        return element;
+    })
+    let newFilterArray2 = filterArray.filter((element, index, array) => {
+        return element > 2;
+    })
+    console.log(newfilterArray); //[1, 2, 3]
+    console.log(newFilterArray2); //[3]
+    //扩展兼容
+    Array.prototype.filter = Array.prototype.filter || function (fn, context) {
+        let arr = [];
+        if (typeof fn === "function") {
+            for (let k = 0, length = this.length; k < length; k++) {
+                fn.call(context, this[k], k, this) && arr.push(this[k]);
+            }
+        }
+        return arr;
+    };
+    console.log(`___________________________上面是filter__________________________________________`);
+    //some
+    //some方法是只要数组中的某个值，符合你给定的判断条件就返回true；否则，返回false。用法和参数跟前面的方法一样。
+    function isBigEnough(element, index, array) {
+        return element >= 4;
+    }
+    let passed = [1, 2, 3].some(isBigEnough);
+    let passed2 = [1, 2, 3, 4].some(isBigEnough);
+
+    console.log(passed); // false
+    console.log(passed2); // true
+
+    //扩展兼容
+    Array.prototype.some = Array.prototype.some || function (fn, context) {
+        let passed = false;
+        if (typeof fn === "function") {
+            for (let k = 0; k < this.length; k++) {
+                if (passed === true) break;
+                passed = !!fn.call(context, this[k], k, this); //!! 判断true 或则false
+            }
+        }
+        return passed;
+    };
+    console.log(!!1); //true
+    console.log(`___________________________上面是some__________________________________________`);
+    //every
+    //every方法与some方法相对，every方法是数组中的所有值都符合你给定的判断条件的时候才会返回true，否则就返回false。
+    function isBigEnoughs(element, index, array) {
+        return element >= 3;
+    }
+    let passed3 = [2, 3, 4].every(isBigEnoughs);
+    let passed4 = [3, 4, 5].every(isBigEnoughs);
+
+    console.log(passed); // false
+    console.log(passed2); // true
+    //扩展兼容
+    Array.prototype.every = Array.prototype.every || function (fn, context) {
+        let passed = true;
+        if (typeof fn === "function") {
+            for (let k = 0, length = this.length; k < length; k++) {
+                if (passed === false) break;
+                passed = !!fn.call(context, this[k], k, this);
+            }
+        }
+        return passed;
+    };
+    console.log(`___________________________上面是every__________________________________________`);
+    //find / findIndex
+    //find方法用于找出第一个符合条件的数组成员。它的参数跟forEach方法是一样的；所有数组成员依次执行回调函数，直到找出第一个返回值为true的成员，然后返回该成员。如果没有符合条件的成员，则返回undefined。
+    let value = [1, 5, 10, 15].find(function (element, index, array) {
+        return element > 9;
+    });
+    let value2 = [1, 5, 10, 15].find(function (element, index, array) {
+        return element > 20;
+    });
+
+    console.log(value); // 10
+    console.log(value2); // undefined
+
+    //findIndex方法和find相似；不过它返回数组中符合条件的元素的索引。如果所有成员都不符合条件，则返回-1。
+    let value3 = [1, 5, 10, 15].findIndex(function (element, index, array) {
+        return element > 9;
+    });
+    let value4 = [1, 5, 10, 15].findIndex(function (element, index, array) {
+        return element > 20;
+    });
+
+    console.log(value3); // 2
+    console.log(value4); // -1
+
+    //扩展兼容
+    Array.prototype.find = Array.prototype.find || function (fn, context) {
+        if (typeof fn === "function") {
+            for (let k = 0; k < this.length; k++) {
+                if (fn.call(context, this[k], k, this)) {
+                    return this[k];
+                }
+            }
+        }
+        return undefined;
+    };
+    Array.prototype.findIndex = Array.prototype.findIndex || function (fn, context) {
+        if (typeof fn === "function") {
+            for (let k = 0; k < this.length; k++) {
+                if (fn.call(context, this[k], k, this)) {
+                    return k;
+                }
+            }
+        }
+        return -1;
+    };
+    console.log(`___________________________上面是find / findIndex__________________________________________`);
+</script>
+
+</html>
