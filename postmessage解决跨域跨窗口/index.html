@@ -20,7 +20,7 @@
         //data 要传递的数据(任意基本类型的对象),部分浏览器只能处理字符串参数，有时可以用JSON.stringify()对对象进行序列化
         //origin 字符串参数 ，指明目标窗口的源，协议+主机+端口号[+URL]，URL会被忽略，所以可以不写，这个参数是为了安全考虑，postMessage()方法只会将message传递给指定窗口，当然如果愿意也可以建参数设置为"*"，这样可以传递给任意窗口，如果要指定和当前窗口同源的话设置为"/"。
         window.onload = function () {
-            // window.frames[0].postMessage('getcolor', '/lslib.html');  //例子
+            // window.frames[0].postMessage('getcolor', '/lslib.html');  //发送一个'getcolor'的请求
         }
         //例子主要是实现通过点击iframe 改变div color的颜色
         window.addEventListener('message', function (e) { //主页面接收消息 改变颜色
