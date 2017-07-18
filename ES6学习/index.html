@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ES6RES参数和扩展运算符</title>
+</head>
+
+<body>
+</body>
+<script>
+    //rest参数
+    //rest参数和扩展运算符都是ES6新增的特性。
+    // rest参数的形式为：...变量名；扩展运算符是三个点（...）。
+    function add(...values) {
+        let sum = 0;
+        for (var val of values) {
+            sum += val;
+        }
+        return sum;
+    }
+    console.log(add(1, 2, 3)); //6
+    function argumentsVal(val) {
+        console.log(arguments); //arguments对象包含传给函数的所有实参
+    }
+    argumentsVal(1);
+    //使用rest参数之后不能有其它参数
+    //function f(a,...b,c){...} //会报错
+
+    //扩展运算符
+    console.log(1, ...[1, 2, 3, 4], 5); //1 1 2 3 4 5
+    //扩展运算符的运用
+    function push(array, ...items) {
+        array.push(...items);
+        return array;
+    }
+    console.log(push([], 1, 2, 3, 4, 5)); //[1,2,3,4,5]
+    function add(x, y) {
+        return x + y;
+    }
+    let numbers = [4, 6];
+    console.log(add(...numbers)); //10
+    //替代apply 方法调用函数
+    //ES5的写法
+    Math.max.apply(null, [14, 3, 77]);
+    //ES6的写法
+    Math.max(...[14, 3, 77]);
+    //等同于
+    Math.max(14, 3, 77);
+</script>
+
+</html>
