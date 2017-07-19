@@ -42,11 +42,21 @@
     console.log(add(...numbers)); //10
     //替代apply 方法调用函数
     //ES5的写法
-    Math.max.apply(null, [14, 3, 77]);
+    console.log(Math.max.apply(null, [14, 3, 77])); //77
     //ES6的写法
-    Math.max(...[14, 3, 77]);
+    console.log(Math.max(...[14, 3, 77])); //77
     //等同于
-    Math.max(14, 3, 77);
+    console.log(Math.max(14, 3, 77)); //77
+    //Es5写法
+    var arr1 = [1, 2, 3];
+    var arr2 = [4, 5, 6];
+    Array.prototype.push.apply(arr1, arr2)
+    console.log(arr1); //[1,2,3,4,5,6]
+    //es6写法
+    var arr3 = [1, 2, 3];
+    var arr4 = [4, 5, 6];
+    arr3.push(...arr4);
+    console.log(arr3); //[1,2,3,4,5,6]
 </script>
 
 </html>
