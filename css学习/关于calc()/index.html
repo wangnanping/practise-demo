@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="baidu-site-verification" content="wczeFssEiy" />
+    <meta http-equiv="Cache-Control" content="no-transform " />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .demo {
+        width: 300px;
+        height: 90px;
+        background: #000;
+        margin-bottom: 30px;
+    }
+
+    .box {
+        /*width: 300px;*/
+        /*当浏览器不兼容calc，width宽度就为300px ie6-ie8不兼容*/
+        width: calc(100%-(10px+50x)*2);
+        background: red;
+        height: 50px;
+        padding: 0 10px;
+        border: 5px solid green;
+    }
+
+    .demo1 {
+        width: calc(100%-20px*2);
+        margin: 0 auto;
+        height: 50px;
+        background: #000;
+    }
+</style>
+
+<body>
+    <div class="demo">
+        <div class="box"></div>
+    </div>
+    <div class="demo1">
+        <div class="box1"></div>
+    </div>
+</body>
+
+</html>
