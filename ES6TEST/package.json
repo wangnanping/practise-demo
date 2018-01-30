@@ -1,0 +1,15 @@
+{
+  "name": "ES6TEST",
+  "version": "1.0.0",
+  "description": "ES6学习",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/home.js -o dist/home.js"
+  },
+  "keywords": [],
+  "author": "wangnanping",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  }
+}

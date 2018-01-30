@@ -1,0 +1,18 @@
+在终端打开ES6TEST目录
+1命令执行 npm init -y 生成package.json
+-y 默认
+
+2执行 全局安装 -g
+npm install -g babel-cli  全局安装 babel
+
+3执行 本地安装
+cnpm install --save-dev babel-preset-es2015 babel-cli
+
+4执行转换
+babel src/index.js -o dist/index.js
+
+5配置package.json
+"build": "babel src/index.js -o dist/index.js"
+
+6执行转换
+npm run build
