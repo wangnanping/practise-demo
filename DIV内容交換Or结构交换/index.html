@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<script type="text/javascript">
+		function moveDiv(id_1,id_2)  //参数传递的是你需要交换位置的两个div的ID
+		{
+			var insert = function(nodeInsert,nodeTo){
+				if(nodeInsert.insertAdjacentElement)
+				{
+					nodeTo.insertAdjacentElement('beforeBegin',nodeInsert);
+				}
+				else
+				{
+					nodeTo.parentNode.insertBefore(nodeInsert,nodeTo);
+				}
+			}
+			var obj= document.createElement("a");
+			var t1 = document.getElementById(id_1);
+			var t2 = document.getElementById(id_2);
+			insert(obj,t2);
+			insert(t2,t1);
+			insert(t1,obj);
+			document.body.removeChild(obj);
+		}
+		function allowDrop(ev) {
+			ev.preventDefault();
+		}
+    var idNameOne = '';
+		var idNameTwo = '';
+//		var srcdiv = null;
+		function drag(ev, divdom) {
+			idNameOne = ev.path[0].id;  // 直接交换内容 和 dom元素的位置
+//			srcdiv = divdom; // 单纯交换内容
+//			ev.dataTransfer.setData("text/html", divdom.innerHTML); // 单纯交换内容
+		}
+
+		function drop(ev, divdom) {
+			ev.preventDefault();
+			idNameTwo = ev.path[0].id; // 直接交换内容 和 dom元素的位置
+			moveDiv(idNameOne, idNameTwo); // 直接交换内容 和 dom元素的位置
+//			if (srcdiv != divdom) {   // 单纯交换内容
+//				srcdiv.innerHTML = divdom.innerHTML; // 单纯交换内容
+//				divdom.innerHTML = ev.dataTransfer.getData("text/html"); // 单纯交换内容
+//			}
+		}
+	</script>
+</head>
+<body>
+
+<div style="width: 50px;height:50px;" id="one" ondrop="drop(event,this);" ondragover="allowDrop(event);" draggable="true" ondragstart="drag(event, this);">
+	div1!
+</div>
+<div style="width: 50px;height:50px;" id="two" ondrop="drop(event,this);" ondragover="allowDrop(event);" draggable="true" ondragstart="drag(event, this);">
+	div2!
+</div>
+<div style="width: 50px;height:50px;" id="three" ondrop="drop(event,this);" ondragover="allowDrop(event);" draggable="true" ondragstart="drag(event, this);">
+	div3
+</div>
+
+</body>
+</html>
