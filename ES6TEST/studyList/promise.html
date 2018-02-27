@@ -30,39 +30,40 @@
 	//	var p3 = p2.catch(function(reason) {
 	//		console.log("失败：" + reason);
 	//	});
-//	---------------------------------------------------------
-//	function judeg(resolve, reject) {
-//		let num = 1;
-//		if (num > 1) {
-//			resolve("成功");
-//		} else {
-//			reject("失败");
-//		}
-//	}
-//	const judegPromise = new Promise(judeg);
-//	judegPromise.then(result => {
-//		console.log("成功1");
-//	}).catch(reason => {
-//		console.log("失败1");
-//	})
-	new Promise(function executor(resolve, reason) {
-		console.log(2);
-		for( var i=0 ; i<10000 ; i++ ) {
-			i == 9999 && resolve();
-			if (i === 200) {
-				reason("失败");
-			}
+	//	---------------------------------------------------------
+	function judeg(resolve, reject) {
+		let num = 1;
+		if (num > 1) {
+			resolve("成功");
+		} else {
+			reject("失败");
 		}
-		console.log(3);
-	}).then(function() {
-		console.log(4);
-	}).then(function() {
-		console.log(5);
-	}).then(function() {
-		console.log(6);
-	}).catch(function() {
-		console.log('失败1');
-	});
+	}
+
+	const judegPromise = new Promise(judeg);
+	judegPromise.then(result => {
+		console.log(result);
+	}).catch(reason => {
+		console.log(reason);
+	})
+	//	new Promise(function executor(resolve, reject) {
+	//		console.log(2);
+	//		for( var i=0 ; i<10000 ; i++ ) {
+	//			i == 9999 && resolve();
+	//			if (i === 200) {
+	//				reject("失败");
+	//			}
+	//		}
+	//		console.log(3);
+	//	}).then(function() {
+	//		console.log(4);
+	//	}).then(function() {
+	//		console.log(5);
+	//	}).then(function() {
+	//		console.log(6);
+	//	}).catch(function() {
+	//		console.log('失败1');
+	//	});
 
 </script>
 </html>
