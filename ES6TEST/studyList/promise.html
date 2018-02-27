@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	//	function test(resolve, reject) {
+	//		var timeOut = Math.random() * 2;
+	//		console.log("set timeout to: " + timeOut + " seconds.");
+	//		setTimeout(function() {
+	//			if (timeOut < 1) {
+	//				console.log("call resolve()...");
+	//				resolve("200 OK");
+	//			}
+	//			else {
+	//				console.log("call reject()...");
+	//				reject("timeout in " + timeOut + " seconds.");
+	//			}
+	//		}, timeOut * 1000);
+	//	}
+	//
+	//	var p1 = new Promise(test);
+	//	var p2 = p1.then(function(result) {
+	//		console.log("成功：" + result);
+	//	});
+	//	var p3 = p2.catch(function(reason) {
+	//		console.log("失败：" + reason);
+	//	});
+//	---------------------------------------------------------
+//	function judeg(resolve, reject) {
+//		let num = 1;
+//		if (num > 1) {
+//			resolve("成功");
+//		} else {
+//			reject("失败");
+//		}
+//	}
+//	const judegPromise = new Promise(judeg);
+//	judegPromise.then(result => {
+//		console.log("成功1");
+//	}).catch(reason => {
+//		console.log("失败1");
+//	})
+	new Promise(function executor(resolve, reason) {
+		console.log(2);
+		for( var i=0 ; i<10000 ; i++ ) {
+			i == 9999 && resolve();
+			if (i === 200) {
+				reason("失败");
+			}
+		}
+		console.log(3);
+	}).then(function() {
+		console.log(4);
+	}).then(function() {
+		console.log(5);
+	}).then(function() {
+		console.log(6);
+	}).catch(function() {
+		console.log('失败1');
+	});
+
+</script>
+</html>

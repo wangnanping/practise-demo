@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	let a = {
+		name1: '1',
+		size1: 12
+	};
+	let b = {
+		name: '2',
+		size: 24
+	};
+	const obj = Object.assign({}, a, b);
+	console.log(obj);
+	// {
+	//	name: '2',
+	//  name1: '1',
+	//	size: 24
+	//  size1: 12,
+	// }
+</script>
+</html>
