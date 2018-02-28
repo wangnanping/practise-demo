@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	// async 是“异步”的简写，而 await 可以认为是 async wait 的简写。
+	// async 用于申明一个 function 是异步的，
+	// await 用于等待一个异步方法执行完成。
+  async function testAsync(){
+  	return "hello async";
+	}
+	const result = testAsync();
+  console.log(result); // 返回一个promise 对象
+  testAsync().then(r => {
+  	console.log(r); // hello async
+	})
+</script>
+</html>
