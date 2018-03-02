@@ -11,13 +11,55 @@
 	// async 是“异步”的简写，而 await 可以认为是 async wait 的简写。
 	// async 用于申明一个 function 是异步的，
 	// await 用于等待一个异步方法执行完成。
-  async function testAsync(){
-  	return "hello async";
+	//  async function testAsync(){
+	//  	return "hello async";
+	//	}
+	//	const result = testAsync();
+	//  console.log(result); // 返回一个promise 对象
+	//  testAsync().then(r => {
+	//  	console.log(r); // hello async
+	//	})
+	/**
+	 * 传入参数 n，表示这个函数执行的时间（毫秒）
+	 * 执行的结果是 n + 200，这个值将用于下一步骤
+	 * sdfghjkl'
+	 *
+	 */
+	function takeLongTime(n) {
+		return new Promise(resolve => {
+			setTimeout(() =>
+		resolve(n + 200), n)
+	  })
 	}
-	const result = testAsync();
-  console.log(result); // 返回一个promise 对象
-  testAsync().then(r => {
-  	console.log(r); // hello async
-	})
+
+	function step1(n) {
+		console.log(`step1 with ${n}`);
+		return takeLongTime(n);
+	}
+
+	function step2(n) {
+		console.log(`step2 with ${n}`);
+		return takeLongTime(n);
+	}
+
+	function step3(n) {
+		console.log(`step3 with ${n}`);
+		return takeLongTime(n);
+	}
+
+	// 使用promise  方式來實現 三个步骤的来处理
+	function doIt() {
+		console.time("doIt");
+		const time1 = 300;
+		step1(time1)
+		.then(time2 => step2(time2))
+	  .then(time3 => step3(time3))
+	  .then(result => {
+			console.log(`result is ${result}`);
+		  console.timeEnd("doIt");
+	  });
+	}
+
+	doIt();
 </script>
 </html>
