@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	//	数组reduce 使用
+		var numbers = [15.5, 2.3, 1.1, 4.7];
+
+		function getSum(total, num) {  //total返回值  num数组下标值1
+			console.log(total+"----------"+num);
+			return total + Math.round(num);
+		}
+		 console.log(numbers.reduce(getSum, 0));
+	//	数组合并1
+//		 let arryOne = new Array(1, 2, 3, 4);
+//		 let arryTwo = new Array(5, 6, 7, 8);
+//		 let arrayNew = Array.prototype.push.apply(arryOne, arryTwo);
+//		 console.log(arrayNew);
+		 let arrayConcat = arryOne.concat(arryTwo);
+		 console.log(arrayConcat);
+	//	 取最大值  最小值
+		let ArraySize = [1,2,3,4,5]
+		console.log(Math.max.apply(null, ArraySize));
+		console.log(Math.min.apply(null, ArraySize));
+</script>
+</html>

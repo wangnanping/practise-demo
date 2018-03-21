@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>函数珂里化</title>
+</head>
+<body>
+
+</body>
+<script>
+	//
+	<!--js柯里化是逐步传参，逐步缩小函数的适用范围，逐步求解的过程。-->
+	function add() {
+		var _args = [];
+		return function() {
+			if (arguments.length === 0) {
+				return _args.reduce(function(a, b) {
+					return a + b;
+				});
+			}
+			[].push.apply(_args, [].slice.call(arguments));
+			return arguments.callee;
+		};
+	}
+	const sum = add();
+	sum(100, 200, 300);
+	sum(400);
+	console.log(sum()); // 1000
+//  柯里化延迟执行 缩小范围
+	function currying(fn){
+		let _args = Array.prototype.slice.call(arguments, 1);    // 取得就是square 这个方法
+		return function() {
+			 let _inargs = Array.prototype.slice.call(arguments);  // 取得就是传的参数[1,2,3,4,5]
+			 console.log(_args.concat(_inargs));                   // [square,[1,2,3,4,5]]
+			 return fn.apply(null, _args.concat(_inargs));
+		}
+	}
+	function square(i) {
+		return i * i;
+	}
+	function map(handeler, list){
+		return list.map(handeler);
+	}
+	const mapSq = currying(map, square);
+	console.log(mapSq([1,2,3,4,5]))
+</script>
+</html>
