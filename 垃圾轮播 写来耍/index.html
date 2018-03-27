@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.swiper_main {
+		position   : relative;
+		width      : 1000px;
+		margin     : 0 auto;
+		margin-top : 100px;
+	}
+
+	.swiper_box {
+		list-style : none;
+		width      : 100%;
+		height     : 400px;
+		position   : relative;
+		margin     : 0;
+		padding    : 0;
+	}
+
+	.swiper_items {
+		position      : absolute;
+		top           : 0;
+		left          : 0;
+		width         : 1000px;
+		height        : 400px;
+		line-height   : 400px;
+		border-radius : 5px;
+		box-shadow    : 0 0 10px #B7B7B7;
+		/*display: none;*/
+		transition    : 1s all;
+		text-align    : center;
+		font-size     : 30px;
+		color         : #FFFFFF;
+	}
+
+	.backgroudn_83D8FC {
+		background : #83D8FC;
+	}
+
+	.backgroudn_4DFE70 {
+		background : #4DFE70;
+	}
+
+	.backgroudn_E319B3 {
+		background : #E319B3;
+	}
+
+	.backgroudn_F33C34 {
+		background : #F33C34;
+	}
+
+	.backgroudn_F57A27 {
+		background : #F57A27;
+	}
+
+	.backgroudn_459068 {
+		background : #459068;
+	}
+
+	.backgroudn_1783B7 {
+		background : #1783B7;
+	}
+
+	.bnt_gulp {
+		position      : absolute;
+		top           : 50%;
+		width         : 50px;
+		height        : 50px;
+		border-radius : 50px;
+		margin-top    : -25px;
+		font-size     : 26px;
+		font-weight   : bolder;
+		text-align    : center;
+		line-height   : 45px;
+		color         : #FFFFFF;
+		background    : rgba(0, 0, 0, .5);
+		cursor        : pointer;
+		transition    : 1s all;
+		opacity       : 0;
+		z-index       : 9999;
+	}
+
+	.pre_btn {
+		left : -60px;
+	}
+
+	.next_btn {
+		right : -60px;
+	}
+
+	.pre_btn_block {
+		opacity : 1;
+		left    : 10px;
+	}
+
+	.next_btn_block {
+		opacity : 1;
+		right   : 10px;
+	}
+</style>
+<body>
+<div class="swiper_main">
+	<ul class="swiper_box">
+		<li class="swiper_items backgroudn_83D8FC">写</li>
+		<li class="swiper_items backgroudn_4DFE70">得</li>
+		<li class="swiper_items backgroudn_E319B3">好</li>
+		<li class="swiper_items backgroudn_F57A27">拉</li>
+		<li class="swiper_items backgroudn_459068">圾</li>
+		<li class="swiper_items backgroudn_1783B7">啊</li>
+	</ul>
+	<div class="bnt_gulp pre_btn"><</div>
+	<div class="bnt_gulp next_btn">></div>
+</div>
+</body>
+<script>
+	window.onload = function() {
+		let swiperMainDom = document.getElementsByClassName("swiper_main")[0];
+		let preDomBtn = document.getElementsByClassName("pre_btn")[0];
+		let nextDomBtn = document.getElementsByClassName("next_btn")[0];
+		let swiperDomLength = document.getElementsByClassName("swiper_items");
+		let domToShowNum = 0;
+		swiperMainDom.onmousemove = function() {
+			preDomBtn.classList.add("pre_btn_block");
+			nextDomBtn.classList.add("next_btn_block");
+			for (let i = 0; i < swiperDomLength.length; i++) {
+				swiperDomLength[i].style.cssText = `left:-${i * 4}px;top:-${i * 4}px;z-index:-${i * 4};`;
+			}
+			swiperDomLength[domToShowNum].style.cssText = `left:0px;top:0px;z-index:20;`;
+		};
+		swiperMainDom.onmouseout = function() {
+			preDomBtn.classList.remove("pre_btn_block");
+			nextDomBtn.classList.remove("next_btn_block");
+			for (let i = 0; i < swiperDomLength.length; i++) {
+				swiperDomLength[i].style.cssText = `left:0px;top:0px;`;
+			}
+			swiperDomLength[domToShowNum].style.cssText = `left:0px;top:0px;z-index:20;`;
+		};
+		preDomBtn.onclick = function() {
+			domToShowNum = domToShowNum - 1;
+			domToShowNum < 0 ? domToShowNum = 5 : domToShowNum = domToShowNum;
+
+			swiperToLeft(domToShowNum);
+		};
+		nextDomBtn.onclick = function() {
+			domToShowNum = domToShowNum + 1;
+			domToShowNum > 5 ? domToShowNum = 0 : domToShowNum = domToShowNum;
+			console.log(domToShowNum);
+			swiperToLeft(domToShowNum);
+		};
+
+		function swiperToLeft(val) {
+			for (let i = 0; i < swiperDomLength.length; i++) {
+				swiperDomLength[i].style.cssText = `left:-${i * 4}px;top:-${i * 4}px;z-index:-${i * 4};`;
+			}
+			swiperDomLength[val].style.cssText = `left:0px;top:0px;z-index:20;`;
+		}
+	};
+</script>
+</html>
