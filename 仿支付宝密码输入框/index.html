@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>写来耍</title>
+</head>
+<style>
+	.inp_box {
+		width         : 240px;
+		border        : 1px solid #CCCCCC;
+		border-radius : 5px;
+		overflow      : hidden;
+	}
+
+	.inp_box > div {
+		float : left;
+		width : 40px;
+	}
+
+	.inp_style {
+		border       : none;
+		width        : 39px;
+		height       : 40px;
+		text-align   : center;
+		border-right : 1px solid #CCCCCC;
+	}
+
+	.see_pwd {
+		cursor : pointer;
+		color  : #83D8FC;
+	}
+
+	.get_pwd {
+		cursor : pointer;
+		color  : #1783B7;
+	}
+</style>
+<body>
+<div class="pay_main">
+	<div class="inp_box"></div>
+	<div class="error_box">提示信息:<span class="error_init"></span></div>
+	<span class="see_pwd">查看密码</span>
+	<span class="get_pwd">一键获取密码</span>
+</div>
+</body>
+<script>
+	window.onload = function() {
+		function creatInpDom(inpNum) {
+			let inpDomWarp = document.getElementsByClassName("inp_box")[0];
+			for (let i = 0; i < inpNum; i++) {
+				let pawDiv = document.createElement("div");
+				pawDiv.className("times_box");
+				inpDomWarp.appendChild(pawDiv);
+				let inpDom = document.createElement("input");
+				inpDom.className = "inp_style inp_dom";
+				inpDom.type = "password";
+				inpDom.maxLength = "1";
+				inpDom.readOnly = "readOnly";
+				pawDiv.appendChild(inpDom);
+				if (i === inpNum - 1) {
+					inpDom.style.cssText = "width:40px;border:none;";
+				}
+			}
+		}
+		creatInpDom(6);
+		let inpPawDom = document.getElementsByClassName("inp_dom");
+		inpPawDom[0].readOnly = false;
+		inpPawDom[0].focus(); // 开启第一个输入框
+	};
+//	https://blog.csdn.net/github_35830425/article/details/52183717v
+</script>
+</html>
