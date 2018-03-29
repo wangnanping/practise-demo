@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dee164cb-d080-46c5-a72a-5ad2f6dd7b66" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/仿支付宝密码输入框/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/仿支付宝密码输入框/index.html" afterPath="$PROJECT_DIR$/仿支付宝密码输入框/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,8 +20,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="69" column="67" lean-forward="false" selection-start-line="69" selection-start-column="67" selection-end-line="69" selection-end-column="67" />
+            <state relative-caret-position="56">
+              <caret line="118" column="37" lean-forward="true" selection-start-line="118" selection-start-column="37" selection-end-line="118" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -29,7 +30,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
+            <state relative-caret-position="2967">
               <caret line="129" column="40" lean-forward="false" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="40" />
               <folding />
             </state>
@@ -64,8 +65,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1173" />
-    <option name="y" value="39" />
+    <option name="x" value="512" />
+    <option name="y" value="5" />
     <option name="width" value="2344" />
     <option name="height" value="1100" />
   </component>
@@ -100,6 +101,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -121,7 +123,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -158,15 +159,16 @@
       <option name="presentableId" value="Default" />
       <updated>1522134757383</updated>
       <workItem from="1522134758950" duration="6267000" />
-      <workItem from="1522218424225" duration="5219000" />
+      <workItem from="1522218424225" duration="6415000" />
+      <workItem from="1522290690543" duration="10598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11486000" />
+    <option name="totallyTimeSpent" value="23280000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1173" y="39" width="2344" height="1100" extended-state="0" />
+    <frame x="512" y="5" width="2344" height="1100" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24978317" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -198,6 +200,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2967">
+          <caret line="129" column="40" lean-forward="false" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -208,7 +226,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
+        <state relative-caret-position="2967">
           <caret line="129" column="40" lean-forward="false" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="40" />
           <folding />
         </state>
@@ -216,8 +234,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="69" column="67" lean-forward="false" selection-start-line="69" selection-start-column="67" selection-end-line="69" selection-end-column="67" />
+        <state relative-caret-position="56">
+          <caret line="118" column="37" lean-forward="true" selection-start-line="118" selection-start-column="37" selection-end-line="118" selection-end-column="37" />
           <folding />
         </state>
       </provider>
