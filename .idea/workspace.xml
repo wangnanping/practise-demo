@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dee164cb-d080-46c5-a72a-5ad2f6dd7b66" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/面向对象/面向对象.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/仿支付宝密码输入框/index.html" afterPath="$PROJECT_DIR$/仿支付宝密码输入框/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +17,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3D视觉效果多元素循环绑定/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="118" column="37" lean-forward="true" selection-start-line="118" selection-start-column="37" selection-end-line="118" selection-end-column="37" />
+            <state relative-caret-position="115">
+              <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -30,8 +40,18 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2967">
-              <caret line="129" column="40" lean-forward="false" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="40" />
+            <state relative-caret-position="3059">
+              <caret line="133" column="43" lean-forward="false" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="面向对象.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/面向对象/面向对象.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="40" column="59" lean-forward="false" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -46,6 +66,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getPwdValue</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -55,6 +80,8 @@
         <option value="$PROJECT_DIR$/轮播/index.html" />
         <option value="$PROJECT_DIR$/垃圾轮播 写来耍/index.html" />
         <option value="$PROJECT_DIR$/仿支付宝密码输入框/index.html" />
+        <option value="$PROJECT_DIR$/面向对象.html" />
+        <option value="$PROJECT_DIR$/面向对象/面向对象.html" />
       </list>
     </option>
   </component>
@@ -65,8 +92,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="512" />
-    <option name="y" value="5" />
+    <option name="x" value="822" />
+    <option name="y" value="26" />
     <option name="width" value="2344" />
     <option name="height" value="1100" />
   </component>
@@ -102,6 +129,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -109,21 +137,10 @@
               <item name="exercise-demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="exercise-demo" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="exercise-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exercise-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="仿支付宝密码输入框" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exercise-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exercise-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="垃圾轮播 写来耍" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -135,6 +152,11 @@
     <property name="last_opened_file_path" value="D:/UTSOFT/figtoo_watering" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\exercise-demo\面向对象" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -160,16 +182,16 @@
       <updated>1522134757383</updated>
       <workItem from="1522134758950" duration="6267000" />
       <workItem from="1522218424225" duration="6415000" />
-      <workItem from="1522290690543" duration="10598000" />
+      <workItem from="1522290690543" duration="12224000" />
+      <workItem from="1522636972928" duration="4879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23280000" />
+    <option name="totallyTimeSpent" value="29785000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="512" y="5" width="2344" height="1100" extended-state="0" />
-    <editor active="true" />
+    <frame x="822" y="26" width="2344" height="1100" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24978317" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -200,6 +222,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/3D视觉效果多元素循环绑定/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3059">
+          <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1771">
+          <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -226,16 +272,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/垃圾轮播 写来耍/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2967">
-          <caret line="129" column="40" lean-forward="false" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="40" />
+        <state relative-caret-position="3059">
+          <caret line="133" column="43" lean-forward="false" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3D视觉效果多元素循环绑定/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/仿支付宝密码输入框/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="118" column="37" lean-forward="true" selection-start-line="118" selection-start-column="37" selection-end-line="118" selection-end-column="37" />
+        <state relative-caret-position="115">
+          <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/面向对象/面向对象.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="40" column="59" lean-forward="false" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
           <folding />
         </state>
       </provider>

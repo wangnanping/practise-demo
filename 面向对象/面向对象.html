@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	window.onload = () => {
+		const Pro = function(name, id) {  // 构造函数pro
+			this.name = name;
+			this.id = id;
+			let num = 10000; // 设置私有属性
+			this.seeNum = (val) => {  // 设置私有方法
+				val === "123" ? console.log("你的薪资是:" + num) : console.log("你没有权限查看");
+			}
+		};
+		Pro.prototype.seeInfo = function() { // 继承
+			console.log("你的名字:"+ this.name+"-------你的编号:"+this.id);
+		};
+		let userOne = new Pro("王南平", 1); // 生成实例 userOne
+		userOne.seeInfo();
+		userOne.seeNum("123");
+		console.log(userOne.constructor);  // 指向的就是构造函数 pro
+		const Poartion = function(name, id, cunt) {
+			Pro.call(this, name, id);  // 继承
+			this.cunt = cunt+1;
+			this.cuntFunction = () => {
+				console.log("得数"+this.cunt);
+			}
+		}
+		let userTwo = new Poartion("往南平1", 2, 2);
+		let userTwo1 = new Poartion("往南平1", 2, 3);
+		userTwo.cuntFunction(); // 3
+		userTwo1.cuntFunction(); // 4
+		console.log(userTwo.cuntFunction === userTwo1.cuntFunction); // false
+//		userTwo、userTwo1 就是多态  缺点 这样生成的每个实例生成cuntFunction方法 都会暂用一部分内存
+//		解决方案如下
+		Poartion.prototype.NewCuntFunction = function() { // 继承
+			console.log("得数"+this.cunt);
+		}
+		userTwo.NewCuntFunction(); // 3
+		userTwo1.NewCuntFunction(); // 4
+		console.log(userTwo.NewCuntFunction === userTwo1.NewCuntFunction); // true
+//		NewCuntFunction方法指向的就是同一个内存地址
+	}
+</script>
+</html>
