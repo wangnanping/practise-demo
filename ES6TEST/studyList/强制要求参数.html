@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	// ES6提供了默认参数值机制，允许你为参数设置默认值，防止在函数被调用时没有传入这些参数。
+	const required = () => {throw new Error('Missing parameter')};
+	const add = (a = required(), b = required()) => a + b;
+	add(1, 2); // 3
+	add(1); // Missing parameter
+</script>
+</html>
