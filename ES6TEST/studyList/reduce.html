@@ -2,12 +2,34 @@
 <html lang="zh-Hans">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>reduce</title>
 </head>
 <body>
 
 </body>
-<script>
+<!--reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。-->
+<!--reduce() 可以作为一个高阶函数，用于函数的 compose。-->
+<!--注意: reduce() 对于空数组是不会执行回调函数的。-->
+<!--array.reduce(function(total, currentValue, currentIndex, arr), initialValue)-->
 
+<script>
+//	<!-- 一下可代替map 循环 和filter 筛选 -->
+	const numbers = [10, 20, 30, 40];
+	const doubledOver50 = numbers.reduce((finalList, num) => {  // 可代替map 循环
+		console.log(num);
+		num = num * 2;
+	if (num > 50) { // 代替fliter 过滤
+		finalList.push(num);
+	}
+	return finalList;
+	}, []);
+	console.log(doubledOver50);
+//	统计数组元素出现的次数
+	const arra = [1,2,3,4,3,2,31];
+	const carsObj = arra.reduce((obj, name) => {
+		obj[name] = obj[name] ? ++obj[name] : 1;
+		return obj;
+}, [])
+	console.log(carsObj);
 </script>
 </html>
