@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>var\let\const</title>
+</head>
+<body>
+
+</body>
+<script>
+    // var  因为es5 只有全局作用域和函数作用域
+    var name = '123';
+    while(true) {
+        var name = '王';
+        console.log(name); // 王
+        break;
+    }
+    console.log(name); // 王
+    // let ES6 新增 块级作用域
+    let num = '123';
+    while(true) {
+        let num = 'wang';
+        console.log(num); // wang
+        break;
+    };
+    console.log(num); // 123
+    // 计数循环泄露为全局变量
+    var number = [];
+    for(var i=0; i<10; i++) {
+//        (function(i) {
+        number[i] = function () {
+            console.log(i);
+        }
+//        }(i))
+
+    }
+    number[6](); // 10 可使用iife 省略部分 解决 结果为6
+    // 第二种解决方案 闭包
+    function closure(val) {
+        var brackVal = function () {
+            console.log(val+'闭包解决方案');
+        }
+        return brackVal;
+    }
+    var numberONE = [];
+    for(var i=0; i<10; i++) {
+        numberONE[i] = closure(i)
+    }
+    numberONE[6](); // 6
+    // let 计数
+    var array = [];
+    for(let i=0; i<10; i++) {
+        array[i] = function () {
+            console.log(i);
+        }
+    }
+    array[6](); // 6
+    // const 申明常量  不可修改的参数
+</script>
+</html>
