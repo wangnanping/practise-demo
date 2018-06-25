@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>JS实用窍门</title>
+</head>
+<body>
+
+</body>
+<script>
+
+	//	删除数组尾部元素
+
+	const arr = [1, 2, 3, 45];
+	arr.length = 2;
+	console.log("删除数组尾部元素" + arr);
+
+	//	使用对象结解构 来设置函数默认参数值
+
+	doSomething({ foo: "1", bar: "2" });
+
+	function doSomething({ foo = "没有传参设置默认值", bar = "没有传参设置默认值" } = {}) {
+		console.log("使用对象结解构 来设置函数默认参数值" + foo);
+		console.log("使用对象结解构 来设置函数默认参数值" + bar);
+	}
+
+	doSomething();
+
+	// 使用对象解构来处理数组
+
+	const string = "wang,nan,ping,xian.sheng";
+	const { 1: val1, 2: val2 } = string.split(",");
+	// split 将字符串转化为数组  再根据Key值 进行解构赋值
+	console.log("使用对象解构来处理数组" + val1);
+	console.log("使用对象解构来处理数组" + val2);
+
+	//	await 多个async 函数
+
+	async function doThing() {
+		return await new Promise(resolve => {
+			console.log("async/await简单使用" + 123123);
+	  });
+	};
+	doThing();
+	//	串行:  等待上一个await异步执行完毕之后 才会执行下一个await
+	async function doSerialThing(val) {
+		 return await new Promise(resolve => {
+		 	setTimeout(()=>{
+			resolve(val);
+		 }, 1000);
+		})
+	}
+	const doSerialStarts = async () => {
+		console.time("time");
+		console.log(await doSerialThing("wang"));
+		console.log(await doSerialThing("ping"));
+		console.timeEnd("time"); // 使用时间 2002...ms
+	}
+  //	doSerialStarts();
+  //	并行: 将多个promise直接发起请求（先执行async所在函数），然后再进行await操作。
+	const doParallelStarts = async () => {
+		console.time("time");
+		const wangFunction = doSerialThing("wang");
+		const pingFunction = doSerialThing("ping");
+		console.log(await wangFunction);
+		console.log(await pingFunction);
+		console.timeEnd("time"); // 使用时间 1001...ms
+	}
+  //	doParallelStarts();
+
+	//	在使用 async/await 的时候，可以使用 Promise.all 来 await 多个 async 函数
+
+	const anAsyncCall = async () => {
+		await new Promise((resolve) => {
+			setTimeout( () => {		console.log("anAsyncCall") })
+		})
+	}
+	const thisIsAlsoAsync = async () => {
+		await new Promise((resolve) => {
+			setTimeout( () => {		console.log("thisIsAlsoAsync") })
+	})
+	}
+	const oneMore = async () => {
+		await new Promise((resolve) => {
+			setTimeout( () => {		console.log("oneMore") })
+	})
+	}
+	const allThing = async () => {
+		console.time("time");
+		await Promise.all([anAsyncCall(), thisIsAlsoAsync(), oneMore()])
+		console.timeEnd("time");
+	}
+	allThing();
+	// 创建一个pure object （纯净的对象）
+	const pureObject = Object.create(null);
+	//	console.log("pure object" + pureObject); // => {}
+	//	console.log("pure object" + pureObject.constructor);
+  //	console.log("pure object" + pureObject.toString()); // not a function
+	// 在数组中去掉重复元素
+	const arr1 = [1,1,'123',123,'2',2,2];
+	console.log([... new Set(arr1)]); // [1,'123',123,'2',2]
+	// 平铺多维数组
+	const arr2 = [1, [2, 3], 4, 5];
+	console.log([].concat(...arr2));  //   此方法仅限制二维数组
+	function flattenArray(arr) {
+		const flattened = [].concat(...arr);
+		return flattened.some(item => Array.isArray(item)) ?
+			flattenArray(flattened) : flattened;
+	}
+	const arr6 = [11, [22, 33], [44, [55, 66, [77, [88]], 99]]];
+	const flatArr = flattenArray(arr6);
+	console.log(flatArr);
+</script>
+</html>
