@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>b</title>
+</head>
+<style>
+	.login_success {
+		display : none;
+	}
+	#child{
+		display: none;
+	}
+</style>
+<body>
+<iframe id="child" src="D:/github/exercise-demo/postMessage实现单点登录/c.html"></iframe>
+<div class="login_warp">
+	<input type="text" value="123" id="userName" />
+	<input type="text" value="123" id="userPwd" />
+	<button id="login">登录</button>
+</div>
+<div class="login_success">登录成功</div>
+</body>
+<script>
+	window.onload = function() {
+		let loginWarp = document.querySelector(".login_warp");
+		let loginHint = document.querySelector(".login_success");
+		let login = document.getElementById("login");
+		let name = document.getElementById("userName");
+		let pwd = document.getElementById("userPwd");
+		login.onclick = function() {
+			if (name.value === "123" && pwd.value === "123") {
+				console.log(1);
+				console.log(loginWarp);
+				loginWarp.style.display = "none";
+				loginHint.style.display = "block";
+			};
+		};
+		if (tk) {
+			if (tk.name === '123' &&  tk.pwd === '123') {
+				loginWarp.style.display = "none";
+				loginHint.style.display = "block";
+			};
+		};
+	}
+
+
+</script>
+</html>
