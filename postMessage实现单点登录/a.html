@@ -9,11 +9,11 @@
 		display : none;
 	}
 	#child{
-		display: none;
+		/*display: none;*/
 	}
 </style>
 <body>
-<iframe id="child" src="D:/github/exercise-demo/postMessage实现单点登录/c.html"></iframe>
+<iframe id="child" src="http://localhost:63341/postMessage实现单点登录/c.html"></iframe>
 <div class="login_warp">
 	<input type="text" value="123" id="userName" />
 	<input type="text" value="123" id="userPwd" />
@@ -32,15 +32,46 @@
 			if (name.value === "123" && pwd.value === "123") {
 				loginWarp.style.display = "none";
 				loginHint.style.display = "block";
+				window.frames[0].postMessage({
+					name: 123,
+					pwd: 123
+				}, 'http://localhost:63341/postMessage实现单点登录/c.html');
 			};
 		};
-		let tk = window.localStorage.getItem("tk") | false;
-		if (tk) {
-         if (tk.name === '123' &&  tk.pwd === '123') {
-	         loginWarp.style.display = "none";
-	         loginHint.style.display = "block";
-				 };
+
+		if (window.frames[0].localStorage.st !== undefined) {
+			console.log(1);
+			let st = JSON.parse(window.frames[0].localStorage.st);
+			window.localStorage.setItem('tokenVal',{
+				name: st.name,
+				pwd: st.pwd
+			});
+			loginTo({
+				name: st.name,
+				pwd: st.pwd
+			});
+		} else {
+			console.log(2);
+			loginTo({
+				name: name.value,
+				pwd: pwd.value
+			});
+		}
+
+		function loginTo(val){
+			let tk = val;
+			console.log(tk);
+			console.log("开始登录");
+			if (tk !== false) {
+				console.log("tk存在");
+				if (tk.name == '123' &&  tk.pwd == '123') {
+					console.log("登录成功");
+					loginWarp.style.display = "none";
+					loginHint.style.display = "block";
+				};
+			};
 		};
+
 	}
 
 

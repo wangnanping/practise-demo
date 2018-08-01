@@ -5,6 +5,15 @@
 	<title>c</title>
 </head>
 <body>
-
+  <div>进来了</div>
 </body>
+<script>
+	window.addEventListener('message', function (e) { //主页面接收消息 改变颜色
+		console.log(e);
+		 //打印查看信息  利用这时候的MessageEvent对象判断了一下消息源//e.data 就是传递来的message
+		window.localStorage.setItem('st', e.data);
+//		window.parent.postMessage(e.data, '*');
+	}, false);
+
+</script>
 </html>
