@@ -2,9 +2,235 @@
 <html lang="zh-Hans">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>tradingView</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="datafeed.js"></script>
+	<script src="charting_library/charting_library.min.js"></script>
+	<script src="data/data.js"></script>
 </head>
 <body>
+<div id="app">
+	<div class="k-line-area bg-1d1d29">
+		<div id="tv_chart_container"></div>
+	</div>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			widget: null,
+			symbolInfo: null,
+		},
+		methods: {
+			createWidget: function(item) {
+				window.sessionStorage.setItem("time_id", "0");
 
+				let _this = this;
+				this.$nextTick(function () {
+					let widget = new TradingView.widget({
+						load_last_chart: false,
+						width: "100%",
+						height: 516,
+						symbol: 'BTC',
+						interval: "15",
+						container_id: "tv_chart_container",
+						//	BEWARE: no trailing slash is expected in feed URL
+						// "http://localhost:3030"
+						datafeed: new Datafeeds.UDFCompatibleDatafeed(
+							"/api/gate", 5000, item
+						),
+						library_path: "./charting_library/",
+						locale:  'zh',
+						//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+						drawings_access: {
+							type: "black",
+							tools: [{name: "Regression Trend"}]
+						},
+						disabled_features: [
+							"header_saveload",
+							"compare_symbol",
+							"display_market_status",
+							"go_to_date",
+							"header_chart_type",
+							"header_compare",
+							"header_interval_dialog_button",
+							"header_resolutions",
+							"header_screenshot",
+							"header_symbol_search",
+							"header_undo_redo",
+							"legend_context_menu",
+							"show_hide_button_in_legend",
+							"show_interval_dialog_on_key_press",
+							"snapshot_trading_drawings",
+							"symbol_info",
+							"timeframes_toolbar",
+							"use_localstorage_for_settings",
+							"volume_force_overlay"
+						],
+						enabled_features: ["hide_left_toolbar_by_default", "dont_show_boolean_study_arguments", "hide_last_na_study_output", "move_logo_to_main_pane", "same_data_requery", "side_toolbar_in_fullscreen_mode"],
+						charts_storage_url: "http://saveload.tradingview.com",
+						charts_storage_api_version: "1.1",
+						client_id: "tradingview.com",
+						timezone: "Asia/Hong_Kong",
+						user_id: "public_user_id",
+						overrides: {
+							"paneProperties.legendProperties.showLegend": false
+						}
+					});
+
+					widget.MAStudies = [];
+					widget.selectedIntervalButton = null;
+
+					widget.onChartReady(function () {
+						let chart = widget.chart();
+
+						let mas = [{
+							day: 5,
+							color: "#965fc4"
+						}, {
+							day: 10,
+							color: "#84aad5"
+						}, {
+							day: 30,
+							color: "#55b263"
+						}, {
+							day: 60,
+							color: "#b7248a"
+						}];
+						let buttons = [
+							{
+								label: "Time-Sharing",
+								resolution: "1",
+								chartType: 3
+							},
+							{
+								label: "1min",
+								resolution: "1"
+							}, {
+								label: "5min",
+								resolution: "5"
+							}, {
+								label: "15min",
+								resolution: "15"
+							}, {
+								label: "30min",
+								resolution: "30"
+							}, {
+								label: "1hour",
+								resolution: "60"
+							}, {
+								label: "4hour",
+								resolution: "240"
+							}, {
+								label: "1day",
+								resolution: "1D"
+							}];
+
+						mas.forEach(item => {
+							chart.createStudy("Moving Average", false, this, [item.day], entity => {
+							widget.MAStudies.push(entity);
+					}, {"plot.color": item.color});
+					});
+
+						chart.onIntervalChanged().subscribe(null, function (interval, obj) {
+							widget.changingInterval = false;
+						});
+
+						buttons.forEach((item, index) => {
+							let button = widget.createButton();
+						item.resolution === widget._options.interval && updateSelectedIntervalButton(button);
+						button.attr("data-resolution", item.resolution)
+						.attr("data-chart-type", item.chartType === undefined ? 1 : item.chartType)
+						.html("<span>" + item.label + "</span>")
+						.on("click", function () {
+							window.sessionStorage.setItem("time_id", "0"); // 让图表制定边界
+							if (!widget.changingInterval && !button.hasClass("selected")) {
+								let chartType = +button.attr("data-chart-type");
+								let resolution = button.attr("data-resolution");
+
+								if (chart.resolution() !== resolution) {
+									widget.changingInterval = true;
+									chart.setResolution(resolution);
+								}
+								if (chart.chartType() !== chartType) {
+									chart.setChartType(chartType);
+									//											widget.applyOverrides({
+									//												"mainSeriesProperties.style": chartType
+									//											});
+								}
+								updateSelectedIntervalButton(button);
+								showMAStudies(chartType !== 3);
+							}
+						})
+					});
+
+						function updateSelectedIntervalButton(button) {
+							widget.selectedIntervalButton && widget.selectedIntervalButton.removeClass("selected");
+							button.addClass("selected");
+							widget.selectedIntervalButton = button;
+						}
+
+						function showMAStudies(visible) {
+							widget.MAStudies.forEach(item => {
+								chart.setEntityVisibility(item, visible);
+						})
+						}
+					});
+
+					_this.widget = widget;
+				})
+			},
+			updateWidget: function(item) {
+				this.createWidget(item);
+			}
+		},
+//		watch: {
+//			currencyType: {
+//				handler(newVal) {
+//					if (newVal) {
+//						window.sessionStorage.setItem("time_id", "0"); // 让图表制定边界
+//						let _this = this;
+//						// if (window.sessionStorage.changeTv === '0') {
+//						// this.widget.onChartReady(function () {
+//						//     _this.widget.remove();
+//						//     _this.createWidget(newVal);
+//						//     window.sessionStorage.setItem('changeTv', '1');
+//						// });
+//						// } else {
+//						//     this.widget.onChartReady(function () {
+//						//         _this.widget.chart().setSymbol(newVal.toCoin, function () {
+//						//             _this.widget.chart().resetData();
+//						//         });
+//						//     });
+//						// }
+//						if (window.sessionStorage.changeTv === '0') {
+//							this.widget.onChartReady(function () {
+//								_this.widget.remove();
+//								_this.createWidget(newVal);
+//							});
+//							window.sessionStorage.setItem('changeTv', '1');
+//						} else {
+//							this.widget.onChartReady(function () {
+//								_this.widget.remove();
+//								_this.createWidget(newVal);
+//							});
+//						}
+//					}
+//				},
+//				deep: true
+//			}
+//		},
+		mounted: function() {
+//			this.currencyType && this.currencyType.typeName && this.updateWidget(this.currencyType);
+		},
+		beforeDestroy: function() {
+			clearInterval(window.sessionStorage.intervalId); // 离开图表页面清除计时请求图表数据
+		}
+	});
+
+</script>
 </body>
+
+
+
 </html>
