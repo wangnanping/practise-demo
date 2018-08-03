@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>highcharts-vue</title>
+	<script src="./vue2.5.17.js"></script>
+	<script src="./highcharts.js"></script>
+	<script src="./data.js"></script>
+</head>
+<body>
+<div id="app" style="padding: 50px;">
+	<div id="container" style="width: 700px; height: 400px;"></div>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			coinTypeName: '',
+                ticks: new Date().getTime(),
+                deviceType: '3',
+                payCoinName: '',
+                min: 0
+		},
+		methods: {
+			loadChart() {
+            let _this = this;
+            let chartTheme = {
+                colors: ["#008c00", "#ee3523"],
+                chart: {
+                    backgroundColor: "#fff",
+                    //borderColor: "#fff",
+                    //borderRadius: 0,
+                    //plotShadow: !0,
+                    //plotBorderWidth: 1,
+                    height: 400
+                },
+                xAxis: {
+                    min: _this.min,
+                    gridLineWidth: 0,
+                    lineColor: "#f2f2f2",
+                    tickColor: "#f2f2f2",
+                    labels: {
+                        style: {
+                            color: "#555"
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: "#666"
+                        }
+                    }
+                },
+                yAxis: {
+                    gridLineWidth: 0,
+                    lineColor: "#f2f2f2",
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    labels: {
+                        style: {
+                            color: "#666666"
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: "#666666"
+                        }
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        animation: false, // 取消数据渲染的动画
+                        fillOpacity: .2
+                    }
+                }
+            };
+            Highcharts.setOptions(chartTheme);
+            Highcharts.zdy_chart = new Highcharts.Chart('container', {
+                chart: {
+                    type: "area",
+                },
+                title: {
+                    text: '深度图'
+                },
+                subtitle: {
+                    text: ""
+                },
+                credits: {
+                    text: "",
+                    href: ""
+                },
+                xAxis: {
+                    // title: {
+                    //     text: '比特币价格'
+                    // },
+                    labels: {
+                        formatter: function () {
+                            return this.value
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value
+                        }
+                    }
+                },
+                tooltip: {
+                    borderColor: 'transparent',
+                    shared: !0,
+                    formatter: function () {
+                        return '委托价' + this.points[0].x + "<br>" + '目前拥有经纪总量'+ Math.round(this.points[0].y)
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        pointStart: 0,
+                        marker: {
+                            enabled: !1,
+                            symbol: "circle",
+                            radius: 2,
+                            states: {
+                                hover: {
+                                    enabled: !0
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [
+                    {
+                        color: '#43C162',
+                        lineColor: 'transparent',
+                        name: '买入',
+                        data: []
+                    },
+                    {
+                        color: '#DC302E',
+                        lineColor: 'transparent',
+                        name: '卖出',
+                        data: []
+                    }]
+            });
+        },
+        deepChart() {
+                if (parseInt(data.code) === 200) {
+                    if (data.data.bids.length > 0) {
+                        this.min = data.data.bids[0][0];
+                    }
+                    this.loadChart();
+                    Highcharts.zdy_chart.series[0].setData(data.data.bids);
+                    Highcharts.zdy_chart.series[1].setData(data.data.asks);
+                }
+        }
+		},
+		mounted() {
+        this.deepChart();
+      }
+	});
+
+</script>
+</body>
+
+
+
+</html>
