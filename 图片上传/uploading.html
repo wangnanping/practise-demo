@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.file_box{
+		position: relative;
+		width:100px;
+		height:100px;
+	}
+	.img{
+		width:100%;
+		position: absolute;
+		top:0;
+		left:0;
+	}
+	.inp{
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		opacity: 0;
+		cursor: pointer;
+	}
+</style>
+<body>
+  <div class="file_box">
+		<img class="img" src="add@2x.png">
+		<input class="inp" onchange="uploadingImg(event)" type="file">
+	</div>
+</body>
+<script type="text/javascript">
+	function $(strExpr){
+		var idExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/;
+		var classExpr = /^(?:\s*(<[\w\W]+>)[^>]*|.([\w-]*))$/;
+		if(idExpr.test(strExpr)){
+			var idMatch = idExpr.exec(strExpr);
+			return document.getElementById(idMatch[2]);
+		}else if(classExpr.test(strExpr)){
+			var classMatch = classExpr.exec(strExpr);
+			var allElement = document.getElementsByTagName("*");
+			var ClassMatch = [];
+			for(var i=0,l=allElement.length; i<l; i++){
+				if(allElement[i].className.match( new RegExp( "(\\s|^)" + classMatch[2] + "(\\s|$)") )){
+					ClassMatch.push(allElement[i]);
+				}
+			}
+			return ClassMatch;
+		}
+	}
+	function uploadingImg(e){
+		let formData = new FormData();
+		let file = e.target.files[0];
+		let  reader= new FileReader();
+		if (file === null||file === ""){
+			console.log( "请选择要上传的图片");
+			return false;
+		}
+		if (file.name.lastIndexOf('.') === -1){
+			console.log( "路径不正确");
+			return false;
+		}
+		let AllImgExt=".jpg|.jpeg|.gif|.bmp|.png|";
+		let extName = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();//（把路径中的所有字母全部转换为小写）
+		if(AllImgExt.indexOf(extName+"|") === -1) {
+			let ErrMsg = "该文件类型不允许上传。请上传 " + AllImgExt + " 类型的文件，当前文件类型为" + extName;
+			console.log(ErrMsg);
+			return false;
+		}
+		reader.onload = function (e) {
+			document.querySelector("img").src = reader.result;
+		};
+		reader.readAsDataURL(e.target.files[0]);
+		formData.append("file", e.target.files[0]);
+		console.log(1);
+		console.log(formData);
+	}
+</script>
+</html>
