@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cmn-Hant">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="./static/favicon.png">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>canvas字母屏</title>
+</head>
+<style>
+    body, html {
+        margin:0;
+        padding: 0;
+    }
+</style>
+<body>
+<div id="canvas_box"></div></body>
+<script>
+  window.onload = () =>{
+      canvasZIMU();
+      window.onresize = () => {  // 当窗口大小有变化时 会触发 浏览器出发次数会有所不同
+        canvasZIMU();
+      }
+      function canvasZIMU() {
+               clearInterval(window.Game_Interval); // 清除之前画布轮询
+                var canvas = document.createElement("canvas");
+                canvas.id = "q";
+                var box = document.getElementById("canvas_box");
+                box.appendChild(canvas);
+                var q = document.getElementById("q");
+                var width = document.documentElement.clientWidth;
+                var height = q.height = 500;
+                document.getElementById("q").width = width;
+                document.getElementById("q").height = height;
+                var yPositions = Array(300).join(0).split("");
+                var ctx = q.getContext("2d");
+                ctx.clearRect(0, 0, width, height);  // 每次变化  清空画布
+                var draw = function() {
+                    ctx.fillStyle = "rgba(17,21,44,.05)";
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.fillStyle = "white";
+                    /*代码颜色*/
+                    ctx.font = "14px Georgia";
+                    yPositions.map(function(y, index) {
+                        var text = String.fromCharCode(1e2 + Math.random() * 330);
+                        var x = (index * 10) + 10;
+                        q.getContext("2d").fillText(text, x, y);
+                        if (y > Math.random() * 1e4) {
+                            yPositions[index] = 0;
+                        } else {
+                            yPositions[index] = y + 10;
+                        }
+                    });
+                };
+                RunMatrix();
+                function RunMatrix() {
+                    window.Game_Interval = setInterval(draw, 40);
+                }
+      }
+  }
+</script>
+</html>
