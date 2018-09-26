@@ -15,6 +15,6 @@
 5. [css-loadding效果](https://wangnanping.github.io/exercise-demo/好看的特效/css-loadding效果/index.html)
 <div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/3.gif"></img></div>
 
-6. [文字实现前后对齐，自适应留空](https://wangnanping.github.io/exercise-demo/好看的特效/文字实现前后对齐，自适应留空/index.html)
-<div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/6.png"></img></div>
+6. [canvas字母屏](https://wangnanping.github.io/exercise-demo/好看的特效/canvas字母屏/index.html)
+<div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/8.gif"></img></div>
 
