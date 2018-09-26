@@ -10,7 +10,7 @@
 <div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/1.gif"></img></div>
 
 4. [Javascript 特效（缓速）返回顶部](https://wangnanping.github.io/exercise-demo/好看的特效/Javascript%20特效（缓速）返回顶部/index.html)
-<div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/4.gif"></img></div>
+<div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/7.gif"></img></div>
 
 5. [css-loadding效果](https://wangnanping.github.io/exercise-demo/好看的特效/css-loadding效果/index.html)
 <div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/3.gif"></img></div>
