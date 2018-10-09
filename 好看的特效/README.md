@@ -18,5 +18,5 @@
 6. [canvas字母屏](https://wangnanping.github.io/exercise-demo/好看的特效/canvas字母屏/index.html)
 <div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/8.gif"></img></div>
 
-7. [canvas字母屏](https://wangnanping.github.io/exercise-demo/好看的特效/粒子动画/index.html)
+7. [粒子动画](https://wangnanping.github.io/exercise-demo/好看的特效/粒子动画/index.html)
 <div><img width="300" src="https://github.com/wangnanping/exercise-demo/blob/master/gif/lizi.gif"></img></div>
