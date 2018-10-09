@@ -24,7 +24,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="indexTwo.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/indexTwo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="817">
+              <caret line="206" column="9" lean-forward="false" selection-start-line="206" selection-start-column="9" selection-end-line="206" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
@@ -54,6 +64,7 @@
       <list>
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/../README.md" />
+        <option value="$PROJECT_DIR$/indexTwo.html" />
       </list>
     </option>
   </component>
@@ -64,8 +75,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="450" />
-    <option name="y" value="382" />
+    <option name="x" value="490" />
+    <option name="y" value="362" />
     <option name="width" value="1777" />
     <option name="height" value="1047" />
   </component>
@@ -147,15 +158,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1539052978608</updated>
-      <workItem from="1539052979826" duration="1384000" />
+      <workItem from="1539052979826" duration="2237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1384000" />
+    <option name="totallyTimeSpent" value="2237000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="450" y="382" width="1777" height="1047" extended-state="0" />
+    <frame x="490" y="362" width="1777" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24956872" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -199,6 +210,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indexTwo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="206" column="9" lean-forward="false" selection-start-line="206" selection-start-column="9" selection-end-line="206" selection-end-column="9" />
           <folding />
         </state>
       </provider>
