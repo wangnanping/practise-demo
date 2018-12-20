@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <title>HTML代码块导出Excel文件（兼容所有浏览器，支持设置文件名） </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="jquery.js" type="text/javascript"></script>
+
+    <script src="common.js" type="text/javascript"></script>
+
+    <link href="global.css" rel="stylesheet" type="text/css" />
+    <style media="print" type="text/css">
+        .Noprint
+        {
+            display: none;
+        }
+        .PageNext
+        {
+            page-break-after: always;
+        }
+        .tblPrint
+        {
+            border: none;
+        }
+    </style>
+    <style type="text/css">
+        table
+        {
+            margin-bottom: 0;
+        }
+        table th, td
+        {
+            border: 0;
+        }
+        #tbHaederText .th
+        {
+            border: 1px solid windowtext;
+            padding: 0cm 2pt 0cm 2pt;
+            background-color: #FFFFFF;
+            height: 20px;
+            font-weight: bold;
+        }
+        #tbHaederText .td
+        {
+            border: 1px solid windowtext;
+        }
+    </style>
+
+    <script language="javascript" type="text/javascript">
+        function PrintDoc() {
+            $(".s_close").remove();
+            window.print();
+        }
+
+        function ReTabColumn(_this) {
+            $("#tdheji").attr("colspan", parseInt($("#tdheji").attr("colspan") - 1));
+            TabColRemove(_this, false);
+        }
+
+        //jQuery移除Table列,isDellast：false最后一行不受影响；true最后一行受影响
+        //<th>标题<span class="s_close" style='color: Red; cursor: pointer' onclick='ReTabColumn(this)' title='隐藏当前列'>×</span></th>
+        function TabColRemove(_this, isDellast) {
+            if (isDellast) {
+                $(_this).parent().parent().parent().find("tr td:nth-child(" + ($(_this).parent().index() + 1) + ")").remove();
+            } else {
+                $(_this).parent().parent().parent().find("tr:not(:last-child)").find("td:nth-child(" + ($(_this).parent().index() + 1) + ")").remove();
+            }
+        }
+
+        //jQuery HTML导出Excel文件(兼容IE及所有浏览器)
+        function HtmlExportToExcel(tableid) {
+            $(".s_close").remove();
+            var filename = $('#lbl_innum_link').text();
+            if (getExplorer() == 'ie' || getExplorer() == undefined) {
+                HtmlExportToExcelForIE(tableid, filename);
+            }
+            else {
+                HtmlExportToExcelForEntire(tableid, filename)
+            }
+        }
+        //IE浏览器导出Excel
+        function HtmlExportToExcelForIE(tableid, filename) {
+            try {
+                var winname = window.open('', '_blank', 'top=10000');
+                var strHTML = document.getElementById(tableid).innerHTML;
+
+                winname.document.open('application/vnd.ms-excel', 'export excel');
+                winname.document.writeln(strHTML);
+                winname.document.execCommand('saveas', '', filename + '.xls');
+                winname.close();
+
+            } catch (e) {
+                alert(e.description);
+            }
+        }
+        //非IE浏览器导出Excel
+        var HtmlExportToExcelForEntire = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+            return function(table, name) {
+                if (!table.nodeType) { table = document.getElementById(table); }
+                var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                document.getElementById("dlink").href = uri + base64(format(template, ctx));
+                document.getElementById("dlink").download = name + ".xls";
+                document.getElementById("dlink").click();
+            }
+        })()
+        function getExplorer() {
+            var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+                return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+                return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+                return 'Safari';
+            }
+        }
+    </script>
+
+</head>
+<body>
+<form name="aspnetForm" method="post" id="aspnetForm">
+    <div class="Noprint tCt inner">
+        <input type="button" class="rbtn23" value="打印" onclick="PrintDoc()" />
+        <input id="Button1" type="button" value="导出EXCEL" class="rbtn23" onclick="javascript:HtmlExportToExcel('PanelExcel')" />
+        <input id="Button2" type="button" value="重置物资明细" class="rbtn24" onclick="javascript: location.reload()" />
+        <a id="dlink" style="display: none;"></a>
+    </div>
+    <hr class="Noprint" />
+    <div class="container_24" style="width: 95%; margin: 0 auto;">
+        <div style="width: 100%;">
+            <div id="PanelExcel">
+                <table cellspacing="0" cellpadding="0" align="center" border="0" class="tblPrint"
+                       style="border: 0px; display: none;">
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" align="center" border="0" class="tblBasic">
+                    <tr>
+                        <td align="center" colspan="4" style="height: 34px">
+                            <h3>
+                                <span id="lblTitle">中国XXXXXXXX有限公司【XXXX单】</span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            入库单号：<span id="lbl_innum_link">RKCODE20170217003</span>
+                        </td>
+                        <td>
+                            入库仓库：<span id="lblDepotName">原材料库</span>
+                        </td>
+                        <td>
+                            仓库库位：<span id="lblkwname"></span>
+                        </td>
+                        <td>
+                            入库类型：<span id="lblInTypeName">调拨入库</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            入库日期：<span id="lblInTime">2017-02-17</span>
+                        </td>
+                        <td>
+                            采购合同：<span id="lbl_ht_link"></span>
+                        </td>
+                        <td colspan="1">
+                            来源流程卡：
+                        </td>
+                        <td>
+                            供应商：<span id="lblSuppliername"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="left">
+                            备注：<span id="lblRemark">根据调拨出库单CKCODE20170217003入库</span>
+                        </td>
+                    </tr>
+                </table>
+                <div style="width: 100%;" class="xScroll">
+                    <table id="tbHaederText" border="1" cellpadding="0" cellspacing="0" align="center"
+                           style="border-collapse: collapse; word-break: keep-all; border-color: Black;
+                        width: 100%;">
+                        <tr align="center">
+                            <td class="th" nowrap>
+                                1-序号
+                            </td>
+                            <td class="th" nowrap>
+                                2-物资分类
+                            </td>
+                            <td class="th" nowrap>
+                                3-物资名称<span class="s_close" style='color: Red; cursor: pointer' onclick='ReTabColumn(this)'
+                                            title='隐藏当前列'>×</span>
+                            </td>
+                            <td class="th" nowrap align='center'>
+                                4-仓管名称<span class="s_close" style='color: Red; cursor: pointer' onclick='ReTabColumn(this)'
+                                            title='隐藏当前列'>×</span>
+                            </td>
+                            <td class="th" nowrap align='center'>
+                                5-销售名称<span class="s_close" style='color: Red; cursor: pointer' onclick='ReTabColumn(this)'
+                                            title='隐藏当前列'>×</span>
+                            </td>
+                            <td class="th" nowrap align='center'>
+                                6-采购名称<span class="s_close" style='color: Red; cursor: pointer' onclick='ReTabColumn(this)'
+                                            title='隐藏当前列'>×</span>
+                            </td>
+                            <td class="th" nowrap>
+                                7-规格型号
+                            </td>
+                            <td class="th" nowrap>
+                                8-采购单号
+                            </td>
+                            <td class="th" nowrap>
+                                9-送货数量
+                            </td>
+                            <td class="th" nowrap>
+                                10-入库件数
+                            </td>
+                            <td class="th" nowrap>
+                                11-单重
+                            </td>
+                            <td class="th" nowrap>
+                                12-入库数量
+                            </td>
+                            <div id="pnl1">
+                                <td class="th" nowrap>
+                                    13-采购指导价
+                                </td>
+                                <td class="th" nowrap>
+                                    14-税前单价
+                                </td>
+                                <td class="th" nowrap>
+                                    15-税前小计
+                                </td>
+                                <td class="th" nowrap>
+                                    16-税率(%)
+                                </td>
+                                <td class="th" nowrap>
+                                    17- 单个税额
+                                </td>
+                                <td class="th" nowrap>
+                                    18-税额小计
+                                </td>
+                                <td class="th" nowrap>
+                                    19-税后单价
+                                </td>
+                                <td class="th" nowrap>
+                                    20-税后小计
+                                </td>
+                            </div>
+                            <td class="th" nowrap>
+                                21-备注
+                            </td>
+                            <td class="th" nowrap>
+                                22-生产定向客户
+                            </td>
+                            <td class="th" nowrap>
+                                23-其下出库
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td" align="center">
+                                1-1
+                            </td>
+                            <td class="td" nowrap>
+                                2-服务内容
+                            </td>
+                            <td class="td" nowrap>
+                                3-弯头
+                            </td>
+                            <td class="td" nowrap>
+                                4-仓管-弯头
+                            </td>
+                            <td class="td" nowrap>
+                                5-销售-弯头
+                            </td>
+                            <td class="td" nowrap>
+                                6-采购-弯头
+                            </td>
+                            <td class="td" nowrap>
+                                7- 
+                            </td>
+                            <td class="td" nowrap align="left">
+                                8- 
+                            </td>
+                            <td class="td" nowrap align="right">
+                                9- 0
+                            </td>
+                            <td class="td" nowrap align="right">
+                                10-0台
+                            </td>
+                            <td class="td" nowrap align="right">
+                                11- 0台
+                            </td>
+                            <td class="td" nowrap align="right">
+                                12-111.1 皮长/公里
+                            </td>
+                            <div id="rpList_ctl00_pnl2">
+                                <td class="td" nowrap align="right">
+                                    13-¥0.00000
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    14-¥0.00000
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    15- ¥0.00
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    16-3.00
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    17- ¥0.00000
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    18-¥0.00
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    19-¥0.00000
+                                </td>
+                                <td class="td" nowrap align="right">
+                                    20- ¥0.00
+                                </td>
+                            </div>
+                            <td class="td" nowrap align="left">
+                                21- 
+                            </td>
+                            <td class="td" nowrap align="left">
+                                22-  
+                            </td>
+                            <td class="td" nowrap align="right">
+                                23- 0.00皮长/公里
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td" id="tdheji" colspan="8" align="right">
+                                1-8 合计(非页小计)：
+                            </td>
+                            <td class="td" align="right">
+                                9- <span id="lbltrueamount">111</span>
+                            </td>
+                            <td class="td" colspan="2">
+                                10-11  
+                            </td>
+                            <div id="pnl3">
+                                <td class="td" align="right">
+                                    12- <span id="lblTotalMoney">¥0.00</span>
+                                </td>
+                                <td class="td" colspan="2">
+                                    13-14  
+                                </td>
+                                <td class="td" align="right">
+                                    15- <span id="lblshuie">¥0.00</span>
+                                </td>
+                                <td class="td">
+                                    16-  
+                                </td>
+                                <td class="td" align="right">
+                                    17- <span id="lblallshuie">¥0.00</span>
+                                </td>
+                                <td class="td" colspan="2">
+                                    18-19  
+                                </td>
+                            </div>
+                            <td class="td" align="right">
+                                20-<span id="lblcktrueamount">0</span>
+                            </td>
+                            <td class="td" colspan="3">
+                                21-23  
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<script src="https://code.csdn.net/snippets/2227333.js"></script>-->
+
+</form>
+</body>
+</html>

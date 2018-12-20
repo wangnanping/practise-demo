@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+<body>
+<p style="font-size: 20px;color: red;">使用a标签方式将json导出csv文件</p>
+<button onclick='tableToExcel()'>导出</button>
+<script>
+   if (!!window.ActiveXObject || "ActiveXObject" in window) {
+       console.log(1);
+   }
+    function tableToExcel(){
+        //要导出的json数据
+        var jsonData = [
+            {
+                name:'路人甲',
+                phone:'123456789',
+                email:'000@123456.com'
+            },
+            {
+                name:'炮灰乙',
+                phone:'123456789',
+                email:'000@123456.com'
+            },
+            {
+                name:'土匪丙',
+                phone:'123456789',
+                email:'000@123456.com'
+            },
+            {
+                name:'流氓丁',
+                phone:'123456789',
+                email:'000@123456.com'
+            },
+        ]
+        //列标题，逗号隔开，每一个逗号就是隔开一个单元格
+        var str = "'姓名,电话,邮箱'+\n";
+        //增加\t为了不让表格显示科学计数法或者其他格式
+        for(let i = 0 ; i < jsonData.length ; i++ ){
+            for(let item in jsonData[i]){
+                str+=jsonData[i][item] + '\t';
+            }
+            str+='\n';
+        }
+        // 注意 千万不要用``来做字符串拼接 IE会报错   window.navigator.userAgent.indexOf("MSIE")会返回-1
+        console.log(window.navigator.userAgent.indexOf("MSIE"));
+        if (getExplorer() == 'ie' || getExplorer() == undefined) {
+            console.log(1);
+            try {
+                var winname = window.open('', '_blank', 'top=10000');
+                winname.document.open('application/vnd.ms-excel', 'export excel');
+                winname.document.writeln(str);
+                winname.document.execCommand('saveas', '',   '你大爷的excel.xls');
+                winname.close();
+
+            } catch (e) {
+                alert(e.description);
+            }
+        } else {
+            // 非IE浏览器兼容
+            //encodeURIComponent解决中文乱码
+            let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+            //通过创建a标签实现
+            var link = document.createElement("a");
+            link.href = uri;
+            //对下载的文件命名
+            link.download =  "json数据表.csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+    }
+
+    function getExplorer() {
+        var explorer = window.navigator.userAgent;
+        //ie
+        if (!!window.ActiveXObject || "ActiveXObject" in window){
+            return 'ie';
+        }else if (explorer.indexOf("MSIE") >= 0) {
+            return 'ie';
+        }
+        //firefox
+        else if (explorer.indexOf("Firefox") >= 0) {
+            return 'Firefox';
+        }
+        //Chrome
+        else if (explorer.indexOf("Chrome") >= 0) {
+            return 'Chrome';
+        }
+        //Opera
+        else if (explorer.indexOf("Opera") >= 0) {
+            return 'Opera';
+        }
+        //Safari
+        else if (explorer.indexOf("Safari") >= 0) {
+            return 'Safari';
+        }
+    }
+</script>
+</body>
+</html>

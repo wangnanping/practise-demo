@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>写来耍</title>
+</head>
+<style>
+	.inp_box {
+		width         : 240px;
+		border        : 1px solid #CCCCCC;
+		border-radius : 5px;
+		overflow      : hidden;
+	}
+
+	.inp_box > div {
+		float : left;
+		width : 40px;
+	}
+
+	.inp_style {
+		border       : none;
+		width        : 39px;
+		height       : 40px;
+		text-align   : center;
+		border-right : 1px solid #CCCCCC;
+	}
+
+	.see_pwd {
+		cursor : pointer;
+		color  : #83D8FC;
+	}
+
+	.get_pwd {
+		cursor : pointer;
+		color  : #1783B7;
+	}
+	.error_init{
+		color:red;
+	}
+</style>
+<body>
+<div class="pay_main">
+	<div class="inp_box"></div>
+	<div class="error_box">提示信息:<span class="error_init"></span></div>
+	<span class="see_pwd">查看密码</span>
+	<span class="get_pwd">一键获取密码</span>
+</div>
+</body>
+<script>
+	window.onload = () => {
+		let num = 6; // 设置密码的位数
+		let pwdStatus = false;  // 密码显示状态
+ 		const creatInpDom = (inpNum) => {  // 动态添加 密码框数量
+			let inpDomWarp = document.getElementsByClassName("inp_box")[0];
+			for (let i = 0; i < inpNum; i++) {
+				let pawDiv = document.createElement("div");
+				pawDiv.classList.add("times_box");
+				inpDomWarp.appendChild(pawDiv);
+				let inpDom = document.createElement("input");
+				inpDom.className = "inp_style inp_dom";
+				inpDom.type = "password";
+				inpDom.maxLength = "1";
+				inpDom.readOnly = "readOnly";
+				pawDiv.appendChild(inpDom);
+				if (i === inpNum - 1) {
+					inpDom.style.cssText = "width:40px;border:none;";
+				}
+			}
+		};
+		creatInpDom(num);
+		let inpPawDom = document.getElementsByClassName("inp_dom");
+		inpPawDom[0].readOnly = false;
+		inpPawDom[0].focus(); // 开启第一个输入框
+		// 绑定times_box点击事件
+		let inpDom = document.getElementsByClassName("inp_dom");
+		const nextInp = (val) => {  // 输入 进入下一个
+			if(inpDom[val].value.length === 1){
+				inpDom[val].blur();
+				inpDom[val].readOnly = 'readOnly';
+				if( val < num -1){
+					inpDom[val+1].focus();
+					inpDom[val+1].readOnly = false;
+				}
+			}
+		};
+		const deleInpValue = () => {  // 删除
+				for (let i = 0; i<num; i++) {
+					if (inpDom[num-i-1].value.length === 1) {
+						inpDom[num-i-1].value = '';
+						inpDom[num-i-1].blur();
+						inpDom[num-i-1].readOnly = 'readOnly';
+						inpDom[num-i-1].focus();
+						inpDom[num-i-1].readOnly = false;
+						break;
+					}
+				}
+		};
+		const func = () => {
+			for (let i = 0; i < num; i++) {
+				inpDom[i].onkeyup = function() {  // 绑定keyup事件
+					nextInp(i);
+				}
+			}
+		};
+		func();
+    document.onkeyup = () => {
+				 switch (event.keyCode){
+					 case 8:
+						 deleInpValue();
+						 break
+					 case 13:
+						 getPwdValue();
+						 break;
+				 }
+		};
+		function getPwdValue(){
+			let pwdValue = '';
+			for (let i = 0; i<num; i++) {
+				pwdValue +=  inpDom[i].value;
+			};
+			if (pwdValue.length<num){
+				document.getElementsByClassName("error_init")[0].innerHTML = '请输入完整的密码';
+			} else {
+				document.getElementsByClassName("error_init")[0].innerHTML = '';
+				alert(pwdValue);
+			}
+		};
+		document.getElementsByClassName("get_pwd")[0].onclick= () => {
+			getPwdValue();
+		}
+		let seePwdDom = document.getElementsByClassName("see_pwd")[0];
+		seePwdDom.onclick = () => {
+			pwdStatus = !pwdStatus;
+			if (pwdStatus === true){
+				for (let i = 0; i<num; i++) {
+					inpDom[i].type = "text";
+				};
+				seePwdDom.innerHTML = "密码加密";
+			} else {
+				for (let i = 0; i<num; i++) {
+					inpDom[i].type = "password";
+				};
+				seePwdDom.innerHTML = "查看密码";
+			}
+		}
+	}
+</script>
+</html>
