@@ -38,5 +38,5 @@ function run4(name, age) {
     if (age === void 0) { age = 20; }
     return "" + name + age;
 }
-run4("我的名字");
+run4("我的名字111");
 // 剩余参数
