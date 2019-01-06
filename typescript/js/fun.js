@@ -40,3 +40,31 @@ function run4(name, age) {
 }
 run4("我的名字111");
 // 剩余参数
+function run5(value1, value2) {
+    var result = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        result[_i - 2] = arguments[_i];
+    }
+    var val = value1 + value2;
+    result.forEach(function (item, key) {
+        val += item;
+    });
+    return val;
+}
+console.log(run5(10, 11, 1, 2, 3, 4));
+function getInfo(name, age) {
+    if (age) {
+        return '我的年龄' + age;
+    }
+    else {
+        return "我叫:" + name;
+    }
+}
+console.log(getInfo("张三"));
+console.log(getInfo("张三", 20));
+//  console.log(getInfo(11));  // 报错
+//  console.log(getInfo(true)); // 报错
+// 箭头函数 es6
+setTimeout(function () {
+    console.log("箭头函数中：this指向上下文");
+}, 1000);
