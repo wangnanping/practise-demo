@@ -113,3 +113,97 @@ per3.run1();
 console.warn("获取公有属性per3.num--->错误的写法--->" + per3.num); // 错误的写法 外部是无法访问，之所有能运行，是因为转化成了ES5
 per3.run2();
 console.warn("获取公有属性per3.wo--->错误的写法--->" + per3.wo);
+// -静态属性 静态方法
+console.log("----------------------静态属性 静态方法----------------");
+// es5 
+function fun1() {
+    this.name1 = "es5实例属性";
+    this.run1 = function () {
+        console.log("es5实例方法");
+    };
+}
+fun1.run2 = function () {
+    console.log("es5静态方法");
+};
+// 使用实例属性 和方法 都必须new
+var use = new fun1();
+use.run1();
+fun1.run2();
+console.log(use.name1);
+//ts
+var Father4 = /** @class */ (function () {
+    function Father4(name) {
+        this.name = name;
+    }
+    Father4.prototype.run = function () {
+        console.log(this.name);
+    };
+    Father4.run1 = function () {
+        console.log("TS方法前加static---静态方法,没法调用类里面的属性");
+        console.log(Father4.sex);
+    };
+    Father4.sex = "ts静态属性";
+    return Father4;
+}());
+var use1 = new Father4("TS实例属性");
+use1.run();
+Father4.run1();
+// 多态  属于继承，父类定义一个方法不去实现，让继承它的子类去实现，每一个子类都会有不同的表现
+console.log("-----------------多态------------------");
+var Father5 = /** @class */ (function () {
+    function Father5(name) {
+        this.name = name;
+    }
+    Father5.prototype.eat = function () {
+        console.log("吃的方法");
+    };
+    return Father5;
+}());
+var Dog = /** @class */ (function (_super) {
+    __extends(Dog, _super);
+    function Dog(name) {
+        return _super.call(this, name) || this;
+    }
+    Dog.prototype.eat = function () {
+        return this.name + "子类1的表现";
+    };
+    return Dog;
+}(Father5));
+var Cat = /** @class */ (function (_super) {
+    __extends(Cat, _super);
+    function Cat(name) {
+        return _super.call(this, name) || this;
+    }
+    Cat.prototype.eat = function () {
+        return this.name + "子类2的表现";
+    };
+    return Cat;
+}(Father5));
+var DogFun = new Dog("Dog");
+console.log(DogFun.eat());
+var CatFun = new Cat("Cat");
+console.log(CatFun.eat());
+//typescript中的抽象类：它是提供其他类继承的基类，不能直接被实例化。
+//用abstract关键字定义抽象类和抽象方法，抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。
+// abstract抽象方法只能放在抽象类里面
+// 抽象类和抽象方法用来定义标准 。   标准：Animal 这个类要求它的子类必须包含eat方法
+console.log("-------------------抽象类-----------------------------");
+var Father6 = /** @class */ (function () {
+    function Father6(name) {
+        this.name = name;
+    }
+    return Father6;
+}());
+console.warn("abstract抽象类不能实例化，抽象类的抽象方法，子类必须要有");
+var Dog1 = /** @class */ (function (_super) {
+    __extends(Dog1, _super);
+    function Dog1(name) {
+        return _super.call(this, name) || this;
+    }
+    Dog1.prototype.eat = function () {
+        console.log(this.name);
+    };
+    return Dog1;
+}(Father6));
+var Dog2 = new Dog1("抽象类");
+Dog2.eat();
