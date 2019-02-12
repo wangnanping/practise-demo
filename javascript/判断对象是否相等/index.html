@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body
+<script>
+    // 问题：判断 obj2中是否存在obj1相同的元素值,obj1 和 obj2的元素是否相等，如果不相等则obj1的元素值替换obj2的元素值；
+    let  obj1 = { mmm: { kk: 0 }, ccc: {}, ddd: {} };
+    let  obj2 = { mmm: "2", ss: "3" };
+   function objectFun(obj1, obj2) {
+//       Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组
+        let objArray1 = Object.getOwnPropertyNames(obj1);
+        let objArray2 = Object.getOwnPropertyNames(obj2);
+        let newObj = {};
+        for (let item of objArray2) {
+            if (objArray1.includes(item)) {
+                newObj[item] = obj1[item];
+            } else {
+                newObj[item] = obj2[item];
+            }
+        }
+        return newObj;
+    }
+    console.log(objectFun(obj1, obj2));
+//    {mmm: { kk: 0 }, ss: "3"}
+
+</script>
+</html>
