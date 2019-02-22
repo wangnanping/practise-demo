@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+    1. for ... of遍历获取的是对象的键值,for ... in 获取的是对象的键名
+    2.for ... in会遍历对象的整个原型链,性能非常差不推荐使用,而for ... of只遍历当前对象不会遍历原型链
+    3.对于数组的遍历,for ... in会返回数组中所有可枚举的属性(包括原型链),for ... of只返回数组的下标对于的属性值
+    for ... of循环的原理其实也是利用了遍历对象内部的iterator接口,将for ... of循环分解成最原始的for循环,
+ */
+
+    // for of 内部实现的机制可以这么理解
+    let arr = [1, 2, 3, 4];
+    let iterator = arr[Symbol.iterator]();
+    for (let value, res;
+        (res = iterator.next()) && !res.done;) {
+        value = res.value;
+        console.log(value);
+        //1
+        //2
+        //3
+        //4
+    }
+</script>
+
+</html>
