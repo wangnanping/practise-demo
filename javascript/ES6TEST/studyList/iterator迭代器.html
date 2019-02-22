@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+     默认具有iterator接口的数据结构有以下几个，注意普通对象默认是没有iterator接口的（可以自己创建iterator接口让普通对象也可以迭代）
+     Array
+     Map
+     Set
+     String
+     TypedArray（类数组）
+     函数的 arguments 对象
+     NodeList 对象
+    */
+
+    // iterator迭代器是一个对象，它具有一个next方法所以可以这么调用
+    let arr = [1, 2, 3]
+    let iterator = arr[Symbol.iterator]()
+    for (let i = 0; i < arr.length + 1; i++) {
+        console.log(iterator.next());
+    }
+    //  {value: 1, done: false}
+    //  {value: 2, done: false}
+    //  {value: 3, done: false}
+    //  {value: undefined, done: true}
+    /*
+    可迭代的数据结构会有一个[Symbol.iterator]方法
+    [Symbol.iterator]执行后返回一个iterator对象
+    iterator对象有一个next方法
+    next方法执行后返回一个有value,done属性的对象
+    */
+</script>
+
+</html>

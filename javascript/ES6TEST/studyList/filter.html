@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
 	<meta charset="UTF-8">
 	<title>filter</title>
 </head>
+
 <body>
 
 </body>
 <script>
 	window.onload = () => {
-		 const array = [1,2,3,4,54];
-		 const max1 = (age) => {
-		 	return age > 2;
+		const array = [1, 2, 3, 4, 54];
+		const max1 = (age) => {
+			return age > 2;
 		}
 		console.log(array.filter(max1))
+		console.log(array.filter((age) => age > 2))
 	}
 </script>
+
 </html>
