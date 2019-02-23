@@ -10,6 +10,19 @@
 
 </body>
 <script>
+    let bar = {};
+    bar = new Proxy(bar, {
+        get(target, key, val, proxy) {
+            console.log("oops");
+            return Reflect.get(target, key, proxy);
+        },
+        set(target, key, val, proxy) {
+            console.log("设置成功");
+            return Reflect.set(target, key, val, proxy);
+        }
+    })
+    bar.foo = '设置'
+    console.log(bar.foo);
 </script>
 
 </html>
