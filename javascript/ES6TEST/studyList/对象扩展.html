@@ -120,6 +120,27 @@
   var desc = Object.getOwnPropertyDescriptors(person);
   console.log(desc)
 
+
+  // Object.setPrototypeOf()
+  // Object.setPrototypeOf 方法的作用与 __proto__ 相同，用来设置一个对象的 prototype 对象，返回参数对象本身，它是 ES6 正式推荐的设置原型对象的方法。
+  let proto = {};
+  let obj4 = {
+    x: 10
+  };
+  Object.setPrototypeOf(obj4, proto); // 如果proto存在属性x为20，则obj4.x 会等于20
+
+  proto.y = 20;
+  proto.z = 40;
+
+  obj4.x // 10
+  obj4.y // 20
+  obj4.z // 40
+
+  // Object.getPrototypeOf()
+  // 该方法与 Object.setPrototypeOf 方法配套，用于读取一个对象的原型对象。
+  Object.getPrototypeOf(obj4);
+
+
   // 简易数据双向绑定
   var oInput1 = document.getElementById('input1');
   var oInput2 = document.getElementById('input2');
