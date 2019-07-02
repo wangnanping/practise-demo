@@ -13,7 +13,7 @@
 
 定义标准。
  */
-console.log("--------------Ts接口--------------------");
+console.log('--------------Ts接口--------------------');
 function printName(label) {
     console.log(label);
 }
@@ -25,7 +25,31 @@ function printName1(val) {
 //  传入的参数必须包含 age 和name  两个属性
 var printVal = {
     age: 12,
-    name: "王先生",
-    woi: "123"
+    name: '王先生',
+    woi: '123'
 };
 printName1(printVal);
+var xy = { x: 12, y: 13 };
+function planFun(label) {
+    // 这种写法就是必须要返回这两个参数
+    var pageStyle = { widthProduct: 0, heightProduct: 0, color: 'red' };
+    if (label.width) {
+        pageStyle.widthProduct = label.width * label.width;
+    }
+    if (label.height) {
+        pageStyle.heightProduct = label.height * label.height;
+    }
+    return pageStyle;
+}
+var planVal = planFun({ width: 12, height: 18 });
+console.log(planVal); //{widthProduct: 144, heightProduct: 324, color: "red"}
+// 报错
+// let onePlanVal = planFun({ width: 12, option: 18 }) // option不是TypeArray已知属性 可以添加字符串索引签名
+var onePlanVal = planFun({ width: 12, height: 12, option: 18 });
+// 断言
+var AssertionVal = [1, 2, 3, 4, 5]; // 简写类型 number<>
+var AssertionReadOnly = AssertionVal;
+// 错误
+// AssertionVal = AssertionReadOnly; 将只读数组赋值给一个普通数组会报错
+AssertionVal = AssertionReadOnly;
+console.log(AssertionVal);
