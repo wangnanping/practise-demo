@@ -33,6 +33,7 @@
 
 
   // Object.assign方法 浅拷贝
+  // 拷贝的属性是有限制的，只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（enumerable: false）。
   // 用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）
   let [
     obj1,
@@ -52,6 +53,8 @@
   Object.assign(2); // object
   // 如果不是对象 会转成obj
   // undefined\null无法转成对象 在第一位会error
+
+  // Object.assign 常用方法
 </script>
 
 </html>
