@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+<!-- 
+  https://mp.weixin.qq.com/s/i1xBLUtVRPhWnl_1EuJVkA
+  Web Workers 使得一个Web应用程序可以在与主执行线程分离的后台线程中运行一个脚本操作。
+  这样做的好处是可以在一个单独的线程中执行费时的处理任务，从而允许主（通常是UI）线程运行而不被阻塞
+-->
+
+<body>
+  <!--主线程，HTML文件的body标签中-->
+
+  <div>
+    Worker 输出内容：
+    <span id='app'></span>
+    <input type='text' title='' id='msg'>
+    <button onclick='sendMessage()'>发送</button>
+    <button onclick='stopWorker()'>stop!</button>
+  </div>
+  <script type='text/javascript'>
+    if (typeof (Worker) === 'undefined') {
+      // 使用Worker前检查一下浏览器是否支持
+      document.writeln(' Sorry! No Web Worker support.. ')
+    } else {
+      window.w = new Worker('./worker.js')
+      window.w.onmessage = ev => {
+        document.getElementById('app').innerHTML = ev.data
+      }
+      window.w.onerror = err => {
+        w.terminate()
+        console.log(error.filename, error.lineno, error.message)
+        // 发生错误的文件名、行号、错误内容
+      }
+
+      function sendMessage() {
+        const msg = document.getElementById('msg')
+        window.w.postMessage(msg.value)
+      }
+
+      function stopWorker() {
+        window.w.terminate()
+      }
+    }
+  </script>
+</body>
+
+</html>
