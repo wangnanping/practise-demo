@@ -47,12 +47,36 @@
     console.log("-------------第三种方式");
     let arr3 = [2];
     let newArr3 = arr3.slice(0);
-    newArr3.push(3)
+    newArr3.push(3);
     console.log(newArr3);
     //4.使用...扩展运算符
-    let arr4 = [1,2,3]
-    let Newarr4 = [...arr4,4]
+    let arr4 = [1, 2, 3];
+    let Newarr4 = [...arr4, 4];
     console.log("-------------第四种方式");
     console.log(Newarr4);
+
+    //--------------------------------------------------------------------------------
+    //操作原数组移除数组中的元素(返回元素组)
+    console.log("题目：操作原数组移除数组中的元素(返回元素组)");
+    //1.循环操作元素组+splice删除下标元素
+
+    let arrsplice = [1, 2, 3, 3, 3, 3];
+    for (let i = 0; i < arrsplice.length; i++) {
+      if (arrsplice[i] == 3) {
+        arrsplice.splice(i, 1);
+        i--;
+      }
+    }
+    console.log("-------------第一种方式");
+    console.log(arrsplice);
+    let arrsplice2 = [1, 2, 3, 3, 3, 3];
+    for (let i = arrsplice2.length; i >= 0; i--) {
+      if (arrsplice2[i] == 3) {
+        arrsplice2.splice(i, 1);
+        i++;
+      }
+    }
+    console.log("-------------第二种方式");
+    console.log(arrsplice2);
   </script>
 </html>
