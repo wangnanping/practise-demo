@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // indexOf  快速查找一个元素在数组中的第一个下标 没有找到返回-1
+    let indexOfArray = [1, 2, 3, 4, 5, 6];
+    if (Array.prototype.indexOf) {
+      // 判断浏览器是否支持indexOf
+      indexOfArray.indexOf(3); // 2
+      indexOfArray.indexOf(3, 4); // 第二参数为可选参数，为从哪个下标开始查找 这里返回-1
+    }
+
+    // 扩展
+    // str.indexOf 字符串方法
+    // 效果如上
+    //--------------------------------------------------------------------------------
+    //添加元素（末尾添加） 不改变原数组
+    console.log("题目：添加元素（末尾添加） 不改变原数组");
+    let arr = [1];
+    let ijj = arr;
+    ijj.push(2); // 这样的方式会改变arr数组，因为数组是引用类型  错误方式
+
+    // 正确方式
+    // 1.for 循环拷贝到新数组变量+push
+    let arrOne = [1];
+    let setArr = [];
+    for (let item of arrOne) {
+      setArr.push(item);
+    }
+    setArr.push(2);
+    console.log("-------------第一种方式");
+    console.log(arrOne);
+    console.log(setArr);
+
+    //2.使用concat合并一个数组或者非数组
+    function concatArr(arr, getArr) {
+      return arr.concat(getArr);
+    }
+    console.log("-------------第二种方式");
+    console.log(concatArr([1], 2));
+    //3.使用slice浅拷贝+push
+    console.log("-------------第三种方式");
+    let arr3 = [2];
+    let newArr3 = arr3.slice(0);
+    newArr3.push(3)
+    console.log(newArr3);
+    //4.使用...扩展运算符
+    let arr4 = [1,2,3]
+    let Newarr4 = [...arr4,4]
+    console.log("-------------第四种方式");
+    console.log(Newarr4);
+  </script>
+</html>
