@@ -123,11 +123,83 @@
     console.log(eval(addArr.join("+")));
     //--------------------------------------------------------------------------------
     //删除数组最后一个元素（返回一个新数组）
+    console.log("删除数组最后一个元素（返回一个新数组）");
     // 1.slice
     let arrSlice = [1, 2, 3, 4];
     console.log("-------------第一种方式");
-   
-   //2.concat/slice+pop
-   
+
+    //2.concat/slice+pop
+    //--------------------------------------------------------------------------------
+    //添加元素(开头添加) 返回一个新数组
+    console.log("添加元素(开头添加) 返回一个新数组");
+    // 4种方式
+    let arrAddList = [1, 2, 3, 4];
+    function arrAddFirst(arr, val) {
+      // let newArr = arr.concat(); // 钱拷贝
+      // let newArr = arr.slice(0); // 钱拷贝
+      // let newArr = JSON.parse(JSON.stringify(arr)); // 钱拷贝
+      let newArr = arr.join().split(",");
+      newArr.unshift(val);
+      return newArr;
+    }
+    console.log(arrAddFirst(arrAddList, 0));
+    //--------------------------------------------------------------------------------
+    //删除数组第一位元素 返回一个新数组
+    console.log("删除数组第一位元素 返回一个新数组");
+    // 可以同上题差不多
+    let deteleArr = [1, 2, 3, 4];
+    function deteltArrFirst(arr) {
+      let newArr = arr.concat();
+      newArr.shift();
+      return newArr;
+    }
+    console.log(deteltArrFirst(deteleArr));
+    //--------------------------------------------------------------------------------
+    //合并数组A和数组B 返回一个新数组
+    console.log("合并数组A和数组B 返回一个新数组");
+    // 第一种concat
+    // 第二种for循环
+    // 第三种扩展运算符 [...A,...B]
+    console.log([...[1, 2], ...[3, 4]]);
+    //--------------------------------------------------------------------------------
+    console.log("数组指定位置添加元素，返回新数组");
+    // 第一种方式 slice+concat 返回
+    function addSetPosition(arr, val, position) {
+      let newArr = arr.slice(0, position);
+      newArr.push(val);
+      let returnARR = newArr.concat(arr.slice(position));
+      return returnARR;
+    }
+    console.log("第一种方式");
+    console.log(addSetPosition([1, 2, 4], 3, 2));
+    // 第二种方式 splice  位置，位置后几位，参数
+    function addSetPositionA(arr, val, position) {
+      let newArr = arr.slice(0);
+      newArr.splice(position, 0, val);
+      return newArr;
+    }
+    console.log("第二种方式");
+    console.log(addSetPositionA([1, 2, 4], 3, 2));
+    //--------------------------------------------------------------------------------
+    console.log("统计数组种 某个元素出现的次数---计数器");
+    console.log("第一种方式");
+    // 普通循环 for for of map效率高于filter
+    function forArr(arr, val) {
+      let num = 0; //计数器3
+      for (let item of arr) {
+        if (item == val) {
+          num++;
+        }
+      }
+      return num;
+    }
+    console.log(forArr([1, 2, 3, 3, 4, 4], 3));
+    console.log("第二种方式");
+    //  可以使用filter
+    function filterArr(arr, val) {
+      let list = arr.filter((item) => item == val);
+      return list.length;
+    }
+    console.log(filterArr([1, 2, 3, 3, 4, 4], 3));
   </script>
 </html>
