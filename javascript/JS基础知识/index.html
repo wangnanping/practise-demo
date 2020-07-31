@@ -201,5 +201,14 @@
       return list.length;
     }
     console.log(filterArr([1, 2, 3, 3, 4, 4], 3));
+    console.log("第三种方式");
+    // 可以使用reduce 累加器  参数说明 4个参数 1.初始值  2.当前元素 3.当前元素的下标 4.当前数组
+    function reduceArr(arr, val) {
+      let num = arr.reduce((start, item) => {
+        return item == val ? start + 1 : start;
+      }, 0); // 0 指的是设置初始值 start为0
+      return num;
+    }
+    console.log(reduceArr([1, 2, 3, 3, 3], 3));
   </script>
 </html>
