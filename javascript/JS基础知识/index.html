@@ -210,5 +210,39 @@
       return num;
     }
     console.log(reduceArr([1, 2, 3, 3, 3], 3));
+    //--------------------------------------------------------------------------------
+    console.log("查找数组中重复的元素 (重复元素返回为一个数组)");
+    //两重循环
+    console.log("第一种方法");
+    function arrrepeat(arr) {
+      let repeatArr = [];
+      for (let item of arr) {
+        let num = 0; // 计数 大于2次就push到repeatArr
+        for (let val of arr) {
+          if (item == val) {
+            num++;
+          }
+        }
+        if (num > 1) {
+          repeatArr.push(item);
+        }
+      }
+      return [...new Set(repeatArr)];
+    }
+    console.log(arrrepeat([1, 2, 3, 3, 4, 4, 5]));
+    // for 循环 + sort 排序
+    console.log("第二种方法");
+    function forSortFun(arr) {
+      let repeatArr = [];
+      arr.sort();
+      for (let i = arr.length; i >= 0; i--) {
+        if (arr[i] == arr[i - 1] && repeatArr.indexOf(arr[i]) == -1) {
+          repeatArr.push(arr[i]);
+        }
+      }
+      return repeatArr;
+    }
+    console.log(forSortFun([1,2,3,4,3,2,1]))
+    //使用fo'i'r
   </script>
 </html>
