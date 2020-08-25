@@ -25,12 +25,21 @@
       <div class="grid_fr_item"></div>
       <div class="grid_fr_item"></div>
     </div>
+    <div class="grid_minmax_list_warp">
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+    </div>
   </body>
   <style type="text/css">
     /* 复习grid布局 块级元素 display:grid; 行内元素  dosplay:inlin-grid;*/
     body {
       text-align: right;
     }
+
     .grid_warp {
       display: inline-grid;
       height: 20px;
@@ -67,7 +76,7 @@
     .grid_fr_list_warp {
       display: grid;
       width: 40px;
-      grid-template-columns:10px 1fr 2fr;
+      grid-template-columns: 10px 1fr 2fr;
       grid-template-rows: repeat(1, 20px 20px);
     }
     .grid_fr_item:nth-child(odd) {
@@ -75,6 +84,14 @@
     }
     .grid_fr_item:nth-child(even) {
       background-color: #000;
+    }
+
+    .grid_minmax_list_warp {
+      display: grid;
+      margin-top:20px;
+      width:40px;
+      grid-template-columns: 1fr 1fr minmax(30px, 2fr);
+      grid-template-rows: repeat(1, 20px 20px);
     }
   </style>
 </html>
