@@ -49,6 +49,14 @@
       <div class="grid_12_item"></div>
       <div class="grid_12_item"></div>
     </div>
+    <div class="grid_gap_list_warp">
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+    </div>
   </body>
   <style type="text/css">
     /* 复习grid布局 块级元素 display:grid; 行内元素  dosplay:inlin-grid;*/
@@ -121,7 +129,7 @@
     .grid_12_list_warp {
       display: grid;
       margin-top: 20px;
-      width:50%;
+      width: 50%;
       grid-template-columns: repeat(auto-fill, 30px);
     }
     .grid_12_list_warp > .grid_12_item {
@@ -133,6 +141,20 @@
     }
     .grid_12_list_warp > .grid_12_item:nth-child(even) {
       background-color: #000;
+    }
+
+    .grid_gap_list_warp {
+      display: grid;
+      margin-top: 20px;
+      width: 40px;
+      grid-template-columns: repeat(auto-fill, 33.3%);
+      /* grid-column-gap:10px;
+      grid-row-gap:10px; */
+      /* grid-gap:10px 10px; */
+      grid-gap:10px;
+    }
+    .grid_gap_list_warp > .grid_item {
+      height: 20px;
     }
   </style>
 </html>
