@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid布局</title>
+  </head>
+  <body>
+    <div class="grid_warp"></div>
+    <div class="grid_list_warp">
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+      <div class="grid_item"></div>
+    </div>
+    <div class="grid_autoFill_list_warp">
+      <div class="grid_autoFill_item"></div>
+      <div class="grid_autoFill_item"></div>
+      <div class="grid_autoFill_item"></div>
+      <div class="grid_autoFill_item"></div>
+    </div>
+    <div class="grid_fr_list_warp">
+      <div class="grid_fr_item"></div>
+      <div class="grid_fr_item"></div>
+      <div class="grid_fr_item"></div>
+      <div class="grid_fr_item"></div>
+    </div>
+  </body>
+  <style type="text/css">
+    /* 复习grid布局 块级元素 display:grid; 行内元素  dosplay:inlin-grid;*/
+    body {
+      text-align: right;
+    }
+    .grid_warp {
+      display: inline-grid;
+      height: 20px;
+      width: 20px;
+      background-color: red;
+    }
+
+    .grid_list_warp {
+      display: grid;
+      /* grid-template-columns: 20px 20px 20px;
+      grid-template-rows: 20px 20px 20px; */
+      grid-template-columns: repeat(1, 20px 20px 20px);
+      grid-template-rows: repeat(1, 20px 20px 20px);
+    }
+    .grid_item:nth-child(odd) {
+      background-color: red;
+    }
+    .grid_item:nth-child(even) {
+      background-color: #000;
+    }
+
+    .grid_autoFill_list_warp {
+      display: grid;
+      width: 40px;
+      grid-template-columns: repeat(auto-fill, 20px);
+      grid-template-rows: repeat(1, 20px 20px 20px);
+    }
+    .grid_autoFill_item:nth-child(odd) {
+      background-color: red;
+    }
+    .grid_autoFill_item:nth-child(even) {
+      background-color: #000;
+    }
+    .grid_fr_list_warp {
+      display: grid;
+      width: 40px;
+      grid-template-columns:10px 1fr 2fr;
+      grid-template-rows: repeat(1, 20px 20px);
+    }
+    .grid_fr_item:nth-child(odd) {
+      background-color: red;
+    }
+    .grid_fr_item:nth-child(even) {
+      background-color: #000;
+    }
+  </style>
+</html>
