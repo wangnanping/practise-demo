@@ -1,7 +1,8 @@
 // 尖括号语法 和 as语法
 let somevalue: any = "struggle";
 let strLength: number = (<string>somevalue).length;
-let strLength2: number = (somevalue as string).length;
+let strLength2: number = (somevalue as string)?.length;
+console.log(strLength2)
 
 // 非空断言
 
