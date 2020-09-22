@@ -57,6 +57,15 @@
       <div class="grid_item"></div>
       <div class="grid_item"></div>
     </div>
+    <div class="grid_auto_flow_warp">
+      <div class="grid_item">1</div>
+      <div class="grid_item">2</div>
+      <div class="grid_item">3</div>
+      <div class="grid_item">4</div>
+      <div class="grid_item">5</div>
+      <div class="grid_item">6</div>
+      <div class="grid_item">7</div>
+    </div>
   </body>
   <style type="text/css">
     /* 复习grid布局 块级元素 display:grid; 行内元素  dosplay:inlin-grid;*/
@@ -155,6 +164,17 @@
     }
     .grid_gap_list_warp > .grid_item {
       height: 20px;
+    }
+    .grid_auto_flow_warp{
+      display:grid;
+      width:40px;
+      grid-template-columns: repeat(3,33.3%);
+      grid-template-rows:repeat(3,33.3%);
+      margin-top:20px;
+      grid-auto-flow:column;
+    }
+    .grid_auto_flow_warp>.grid_item{
+      color:#FFF;
     }
   </style>
 </html>
