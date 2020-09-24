@@ -20,3 +20,24 @@ function NewGenericsFun<T, U>(name: T, age: U): T {
 }
 
 console.log(NewGenericsFun<string, number>("王", 20));
+
+// 泛型接口
+
+interface GenericIdentityFn<T> {
+  (arg: T): T;
+}
+
+// 泛型类
+
+class GenericNumber<T> {
+  value: T;
+  add: (x: T, y: T) => T;
+}
+
+let newGenericNumber = new GenericNumber<number>();
+newGenericNumber.value = 0;
+newGenericNumber.add = (x, y) => {
+  return x + y;
+};
+
+
