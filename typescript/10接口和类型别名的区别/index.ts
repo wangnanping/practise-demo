@@ -25,7 +25,7 @@ type SixType = { six: number };
 
 type AgeType = { age: number };
 
-type UserInfo = SixType & AgeType; // 联合类型
+type UserInfo = SixType & AgeType; // 交叉类型
 
 type GetUserInfo = SixType | AgeType; // 联合类型
 

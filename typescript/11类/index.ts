@@ -124,4 +124,45 @@ let sonExample = new son("王");
 // sonExample.getName();
 // sonExample.name;
 
-// 未完待续
+// --------------------------------------
+// 抽象类
+
+//使用 abstract 关键字声明的类，我们称之为抽象类。抽象类不能被实例化，因为它里面包含一个或多个抽象方法。所谓的抽象方法，是指不包含具体实现的方法：
+
+abstract class AbstractPerson {
+  constructor(public name: string) {}
+  abstract say(word: string): void;
+}
+
+// let NewAbstractPerson = new AbstractPerson() //error  无法创建抽象类的实例。
+
+class AbstractPersonSon extends AbstractPerson {
+  constructor(name: string) {
+    super(name);
+  }
+
+  say(word: string) {
+    console.log("子类去实现抽象类的方法");
+  }
+}
+
+let NewAbstractPersonSon = new AbstractPersonSon("实现");
+NewAbstractPersonSon.say("抽象类的方法");
+
+// 类重载 类似函数重载
+class PersonFather {
+  numAdd(): void;
+  numAdd(num: number): void;
+  numAdd(num?: number) {
+    if (typeof num == "number") {
+      return num;
+    } else {
+      return "获取所有的产品信息";
+    }
+  }
+}
+
+const PersonFatherSon = new PersonFather();
+
+PersonFatherSon.numAdd(6);
+PersonFatherSon.numAdd();
