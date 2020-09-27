@@ -5,6 +5,7 @@ interface Person {
   age?: number;
 }
 
+// --------------------
 // Partial
 
 // 源码
@@ -15,6 +16,7 @@ interface Person {
 type person = Partial<Person>;
 // person === {name?: string; age?: number}
 
+// --------------------
 // Required
 
 // type Required<T> = {
@@ -24,6 +26,7 @@ type person = Partial<Person>;
 type persons = Required<Person>;
 // persons === {name: string; age: number}
 
+// --------------------
 // Readonly
 
 // type Readonly<T> = {
@@ -32,3 +35,23 @@ type persons = Required<Person>;
 
 type personss = Required<Person>;
 // personss === {readonly name: string; readonly age?: number}
+
+// --------------------
+// Pick
+
+// type Pick<T, K extends keyof T> = {
+//     [P in K]:T[P]
+// }
+
+type personsss = Pick<Person, "name">;
+// personsss === {name: string}
+
+// --------------------
+// Record
+
+// type Record<K extends keyof any, T> = {
+//   [P in K]: T[P];
+// };
+
+type personssss = Record<"name" | "age", string>;
+// personssss === {name:string;age:string}
