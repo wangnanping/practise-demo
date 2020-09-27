@@ -64,8 +64,9 @@ type ObjKeys = {
 
 const ObjKeyss: ObjKeys = { a: 1, b: 1, c: 2 };
 
-// infer
+// infer  
 // 在条件类型语句中，可以用infer声明一个类型变量并且对它进行使用
+// https://segmentfault.com/a/1190000018514540?utm_source=tag-newest
 
 type ReturnTypes<T> = T extends (...arg: any[]) => infer R ? R : T;
 
