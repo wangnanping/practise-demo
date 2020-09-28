@@ -60,7 +60,6 @@ class Person {
     return `私有名称为: ${this.#name}`;
   }
 }
-
 let personSon = new Person("王先生");
 // personSon.#name  // error 属性 "#name" 在类 "Person" 外部不可访问，因为它具有专用标识符。
 
