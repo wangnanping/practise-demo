@@ -45,6 +45,7 @@ class SpaceRepeatingPadder implements Padder {
 }
 
 class StringPadder implements Padder {
+  name: string = "wang";
   constructor(private value: string) {}
   getPaddingString() {
     return this.value;
