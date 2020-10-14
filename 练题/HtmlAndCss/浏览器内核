@@ -1,0 +1,26 @@
+核心的部分是“Rendering Engine”，可大概译为“渲染引擎”，不过我们
+
+一般习惯将之称为“浏览器内核”。负责对网页语法的解释（如标准通用标记语言下的一
+
+个应用 HTML、JavaScript）并渲染（显示）网页。 所以，通常所谓的浏览器内核也就是
+
+浏览器所采用的渲染引擎，渲染引擎决定了浏览器如何显示网页的内容以及页面的格式信
+
+息。不同的浏览器内核对网页编写语法的解释也有不同，因此同一网页在不同的内核的浏
+
+览器里的渲染（显示）效果也可能不同，这也是网页编写者需要在不同内核的浏览器中测
+
+试网页显示效果的原因。
+
+ 
+常见浏览器内核
+ 
+Trident 内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称 MSHTML]
+
+Gecko 内核：Netscape6 及以上版本，FF,MozillaSuite/SeaMonkey 等。
+
+Presto 内核：Opera7 及以上。 [Opera 内核原为：Presto，现为、Blink;]
+
+Webkit 内核：Safari,Chrome 等。 [ Chrome 的：Blink（WebKit 的分支）]
+
+EdgeHTML 内核：Microsoft Edge。 [此内核其实是从 MSHTML fork 而来，删掉了几乎所有的 IE 私有特性]

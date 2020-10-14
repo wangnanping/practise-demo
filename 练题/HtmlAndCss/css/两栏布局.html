@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局</title>
+</head>
+<style>
+    .content1 {
+        float: left;
+        width: 300px;
+        background-color: aqua;
+        height: 100px;
+    }
+
+    .content11 {
+        background-color: black;
+        margin-left: 300px;
+        height: 100px;
+        color: #fff;
+    }
+
+
+    .content2 {
+        float: left;
+        width: 300px;
+        background-color: aqua;
+        height: 100px;
+        margin-right: -100%;
+    }
+
+    .right_content22 {
+        width: 100%;
+        float: left;
+    }
+
+    .content22 {
+        margin-left: 300px;
+        height: 100px;
+        background-color: black;
+        color: #fff;
+    }
+
+
+
+
+    .warp3 {
+        position: relative;
+    }
+
+    .content3 {
+        position: absolute;
+        left: 0;
+        width: 300px;
+        background-color: aqua;
+        height: 100px;
+    }
+
+    .content33 {
+        margin-left: 300px;
+        height: 100px;
+        background-color: black;
+        color: #fff;
+    }
+
+
+    .warp4_flex {
+        display: flex;
+    }
+
+    .content4 {
+        flex: 0 0 300px;
+        background-color: aqua;
+        height: 100px;
+    }
+
+    .content44 {
+        flex: 1 1;
+        height: 100px;
+        background-color: black;
+        color: #fff;
+    }
+</style>
+
+<body>
+    <div class="warp1">
+        <p>标准两栏布局 左固定 右自适应</p>
+        <div class="content1">1</div>
+        <div class="content11">2</div>
+    </div>
+    <div class="warp2">
+        <p>浮动布局+负外边距（双飞翼布局的两栏版）</p>
+        <div class="content2">1</div>
+        <div class="right_content22">
+            <div class="content22">2</div>
+        </div>
+
+    </div>
+    <div class="warp3">
+        <p>定位布局</p>
+        <div class="content3">1</div>
+        <div class="content33">2</div>
+
+    </div>
+    <div class="warp4">
+        <p>flex</p>
+        <div class="warp4_flex">
+            <div class="content4">1</div>
+            <div class="content44">2</div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
