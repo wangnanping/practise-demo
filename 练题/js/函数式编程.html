@@ -63,7 +63,50 @@
 
 
     // 柯里化 -------------------
-     
+    function curry(targetfn) {
+        console.log(targetfn.length);
+        var numOfArgs = targetfn.length;
+        return function fn(...rest) {
+            if (rest.length < numOfArgs) {
+                return fn.bind(null, ...rest);
+            } else {
+                return targetfn.apply(null, rest);
+            }
+        };
+    }
+    // 加法函数
+    function addFn(a, b, c, d) {
+        return a + b + c + d;
+    }
+    // 将一个多参数函数转化为多个嵌套的单参数函数
+    console.log("柯里化：", curry(addFn)(1)(2)(3)(4));
+    // 柯里化：10
+
+
+    // 实现一个addNum(柯里化)方法，使计算结果能够满足类似如下的预期：
+    // addNum(1)(2)(3) = 6;
+    // addNum(1, 2, 3)(4) = 10;
+    // addNum(1)(2)(3)(4)(5) = 15;
+    var add_currying = function (...rest) {
+        var sum = 0;
+        for (let item of rest) {
+            sum += item;
+        }
+        var add_back = (...rest) => {
+            for (let item of rest) {
+                sum += item;
+            }
+            return add_back;
+        };
+        add_back.toString = () => sum;
+
+        return add_back;
+    }
+    console.log(add_currying(1, 2, 3));               //6
+    console.log(add_currying(1, 2)(3, 4));            //10
+    console.log(add_currying(1, 2)(3)(4, 5));         //15
+    console.log(add_currying(1)(2)(3)(4)(5)(6));    //21
+
 </script>
 
 </html>
