@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call、apply、bind</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 例子一：
+    const example1 = function () {
+        let age = 20, name = "小明";
+        let obj = {
+            age: 12,
+            Fn: function () {
+                console.log(this)
+                return `姓名：${this.name},年龄：${this.age}`
+            }
+        }
+
+        console.log(obj.Fn());  //姓名：undefined,年龄：12
+        //错误问题： 当前的this 指向的obj 不存在name属性
+    }
+    example1();
+
+
+    // 例子二:
+    // let names = "小明";var
+    // let agess = "20";
+    var names = "小明";
+    var agess = "20";
+    const example2 = function () {
+        function getUserName() {
+            console.log(this)
+            return `姓名：${this.names},年龄：${this.agess}`
+        }
+        console.log(getUserName())
+        // 使用let声明变量 会出现 姓名：undefined,年龄：undefined  （看补充知识点）
+        // 使用vat声明变量  姓名：小明,年龄：20 (当前的this指向是windows)
+    }
+    example2();
+
+    // 补充知识点：
+    // ES5声明变量只有两种方式：var和function。
+    // ES6有let、const、import、class再加上ES5的var、function共有六种声明变量的方式。
+    // 还需要了解顶层对象：浏览器环境中顶层对象是window，Node中是global对象。
+    // ES5中，顶层对象的属性等价于全局变量。
+    // ES6中，有所改变：var、function声明的全局变量，依然是顶层对象的属性；let、const、class声明的全局变量不属于顶层对象的属性，也就是说ES6开始，全局变量和顶层对象的属性开始分离、脱钩。
+
+    // call \ apply \ bind   （如果第一个参数为null,不改变this指向）
+    // call 
+    const obj = {
+        age: 24,
+        getUserInfo: function (f, t) {
+            return `姓名：${this.name},年龄：${this.age},爱好：${f},运动：${t}`
+        }
+    }
+
+    const objSon = {
+        name: "小明",
+        age: 25
+    }
+    console.log(obj.getUserInfo.call(objSon, "音乐", "篮球"))
+
+    //apply
+    const obj1 = {
+        age: 24,
+        getUserInfo: function (f, t) {
+            return `姓名：${this.name},年龄：${this.age},爱好：${f},运动：${t}`
+        }
+    }
+
+    const objSon2 = {
+        name: "小华",
+        age: 25
+    }
+    console.log(obj1.getUserInfo.apply(objSon2, ["音乐", "篮球"]))
+
+    //bind
+    const obj3 = {
+        age: 24,
+        getUserInfo: function (f, t) {
+            return `姓名：${this.name},年龄：${this.age},爱好：${f},运动：${t}`
+        }
+    }
+
+    const objSon3 = {
+        name: "小花",
+        age: 25
+    }
+    console.log(obj3.getUserInfo.bind(objSon3, "音乐", "篮球")()) // bind返回的是一个新的函数，需要执行
+</script>
+
+</html>
