@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一道闭包</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function fun(n, o) {
+        console.log(o);
+        return {
+            fun: function (m) {
+                return fun(m, n)
+            }
+        }
+    }
+
+    let funOne = fun(0);
+    funOne.fun(1);
+    funOne.fun(2);
+    funOne.fun(3);
+
+    let funTwo = fun(0).fun(1).fun(2).fun(3);
+
+    let funThree = fun(0).fun(1);
+    funThree.fun(2);
+    funThree.fun(3);
+
+
+    //理解
+
+    // 命名函数
+    function fun1() {
+        console.log(fun1)
+    }
+    fun1()
+    console.log(window.fun1)
+    // 可以答应出fun1这个函数，函数先从自己内部查找，如果没有则会往上查找，找到window.fun1
+
+    //匿名函数
+    let fun2 = function fun21() {
+        console.log(fun21)
+        console.log(fun2)
+    }
+    fun21();// undefined
+    fun2();
+    // 匿名函数命名 只能在函数内部使用，外部undefined,变量fun2全局，同上自己没有往上查找；
+
+    // 解题1
+    // let funOne = fun(0);
+    // funOne.fun(1);
+    // funOne.fun(2);
+    // funOne.fun(3);
+    // undefind,0,0,0
+    // 第一步返回是一个对象，o未赋值，执行第二步的时候（有声明的匿名函数都是新函数），执行第三个fun,这时候n为0，也就是最外层的fun，o会会为0, 第二步和第三步 都是执行的第二个fun方法，o就会一直为0
+    
+    // 解题2
+    // undefined,0,1,2
+    // 执行第一步返回一个对象，执行第二步实现的是第一步的第二个fun，这时m=1,n=0,打印0，执行第三步就会执行第二步的第二个fun,这Ⅹm=2,n=1,答应2，第四步同理
+
+    // 解题3
+    // undefined,0,1,1
+    // 执行第一步返 fun(0).fun(1) undefined,0  这是第三步执行的第二步的第二个fun m=1,n=0, 第三步执行最外层1 ,第四步也是执行的第二步的第二个fun 1
+</script>
+
+</html>
