@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+
+
+
+    function Admin(name) {
+        this.name = name || "admin"
+        this.getName1 = function () {
+            console.log(this.name);
+        }
+        this.getName = function () {
+            console.log("这是Admin的方法")
+        }
+    }
+
+    Admin.prototype.arrList = [];
+
+    Admin.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function Son(name) {
+        Admin.call(this);
+        this.name = name;
+    }
+
+    (function () {
+        let newAdmin = function () { }
+        newAdmin.prototype = Admin.prototype;
+        Son.prototype = new newAdmin();
+    })()
+
+
+    Son.prototype.constructor = Son;
+
+    let son = new Son("王");
+    son.getName();
+    son.getName1();
+    son.arrList.push(1);
+    console.log(son.arrList)
+    console.log(son instanceof Son);
+    console.log(son instanceof Admin);
+
+    let son1 = new Son("王");
+    son1.arrList.push(1);
+    console.log(son1.arrList)
+</script>
+
+</html>

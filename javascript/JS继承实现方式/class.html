@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    class Admin {
+        constructor(name) {
+            this.name = name || "admin"
+        }
+
+        getName1 = function () {
+            console.log(this.name);
+        }
+        getName = function () {
+            console.log("这是Admin的方法")
+        }
+    }
+
+    class Son extends Admin {
+
+    }
+
+    let son = new Son("王")
+    son.getName();
+    son.getName1();
+    console.log(son instanceof Son);
+    console.log(son instanceof Admin);
+</script>
+
+</html>

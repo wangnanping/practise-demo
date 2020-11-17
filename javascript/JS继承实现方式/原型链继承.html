@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 父类
+    function Admin(name) {
+        this.name = name || "Admin";
+        this.list = [];
+    }
+    
+    Admin.prototype.num = [];
+    Admin.prototype.money = 1; 
+    Admin.prototype.eat = function(fruits) {
+        console.log("喜欢吃"+fruits)
+    }
+   
+   
+   console.log("---------------------原型链继承")
+    // 子类
+   function CatA() {
+       this.ageNum = 25;
+   }
+//    CatA.prototype.address = function(address) {  // 新增方法必须要new Admin()之后执行
+//        console.log("地址"+address)
+//    }
+   CatA.prototype.message = "个人信息";  // 无法访问到的
+   CatA.prototype = new Admin();
+   CatA.prototype.name = "catA";
+   CatA.prototype.address = function(address) {
+       console.log("地址"+address)
+   }
+
+  let cat = new CatA();
+  console.log(cat.eat("苹果"));
+  console.log(cat.name);
+  console.log(cat instanceof Admin);
+  console.log(cat instanceof CatA);
+  console.log(cat);
+  
+  
+  Admin.prototype.age = function (age) {
+      console.log("年龄："+age)
+  }
+  console.log(cat.age(24));
+  console.log(cat.ageNum);
+  console.log(cat.message);
+  console.log(cat.address("成都"));
+
+  cat.num.push("1");
+  console.log(cat.num);
+  cat.money = 2;
+  console.log(cat.money);
+
+  function CatB() {
+
+  }
+  CatB.prototype = new Admin();
+
+  function CatC() {
+
+}
+ 
+  CatC.prototype = new Admin();
+
+  let catB = new CatB();
+  let catC = new CatC();
+  console.log(catB.name);
+
+  catB.num.push("2");
+  console.log(catB.num);
+  catC.num.push("3");
+  console.log(catC.num); 
+  catB.money = 3;
+  console.log(catB.money);
+  console.log(catC.money);
+// 特点：
+//   1. 非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+//   2. 父类新增原型方法/原型属性，子类都能访问到
+//   3. 简单，易于实现
+// 缺点：
+//   1. 要想为子类新增prototype原型上属性和方法，必须要在new Animal()这样的语句之后执行;
+//   2. 无法实现多继承
+//   3. 来自原型对象的所有属性被所有实例共享
+
+
+
+
+</script>
+</html>

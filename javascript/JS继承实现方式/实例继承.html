@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Admin(name) {
+        this.name = name || "admin"
+        this.getName1 = function () {
+            console.log(this.name);
+        }
+    }
+
+    Admin.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+
+    function Son(name) {
+        let admin = new Admin();
+        admin.name = name;
+        return admin;
+    }
+
+    let son = new Son("王");
+    son.getName();
+    son.getName1();
+
+    // 特点：
+    // 1. 不限制调用方式，不管是new 子类()还是子类(), 返回的对象具有相同的效果
+    // 缺点：
+    // 1. 实例是父类的实例，不是子类的实例
+    // 2. 不支持多继承
+</script>
+
+</html>
