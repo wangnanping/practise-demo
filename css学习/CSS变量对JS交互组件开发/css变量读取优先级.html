@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        /* 匹配文档的根元素 */
+        :root {
+            --color: blue;
+        }
+
+        div {
+            --color: green;
+        }
+
+        #alert {
+            --color: red;
+        }
+
+        /* 通用选择器 */
+        * {
+            color: var(--color);
+        }
+    </style>
+
+    <p>蓝色</p>
+    <div>绿色</div>
+    <div id="alert">红色</div>
+</body>
+
+</html>

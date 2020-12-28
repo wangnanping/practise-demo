@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切换效果</title>
+</head>
+
+<body>
+    <div class="yw-tab-tab">
+        <a href="javascript:"  class="yw-tab-a">Q0阅读</a>
+        <a href="javascript:"  class="yw-tab-a">起点 读书</a>
+        <a href="javascript:"  class="yw-tab-a">红袖读书</a>
+        <a href="javascript:"  class="yw-tab-a"> 飞读免费小说</a>
+    </div>
+</body>
+<style>
+    .yw-tab-tab {
+        position: relative;
+        display: flex;
+        max-width: 414px;
+        justify-content: space-between;
+        border-bottom: 1px solid #717678;
+        background-color: #fff;
+        margin: 30px auto;
+    }
+    .yw-tab-tab a{
+        text-decoration: none;;
+    }
+
+    .yw-tab-tab::before,
+    .yw-tab-tab::after {
+        position: absolute;
+        width: calc(var(--target-width, 0) * 1px);
+        left: calc(var(--target-left， -299) * 1px);
+        color: #2a80eb;
+    }
+
+    .yw-tab-tab[style]::before,
+    .yw-tab-tab[style]::after {
+        content: '';
+    }
+
+    .yw-tab-tab::before {
+        background-color: currentColor;
+        height: calc(var(--target-height) * 1px);
+        mix-blend-mode: overlay;
+    }
+
+    .yw-tab-tab::after {
+        border-bottom: solid;
+        bottom: - 2px;
+        transition: left .2s, width .25;
+    }
+
+    .yw-tab-a {
+        color: #717678;
+        padding: 10px 0;
+        width:100px;
+    }
+</style>
+</html>

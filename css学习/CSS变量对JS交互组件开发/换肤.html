@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>换肤</title>
+</head>
+
+<body>
+    <div class='main_color'>变色龙</div>
+</body>
+<style>
+    body {
+        --mainColor: #FFF;
+        --mainFontColor: #000;
+    }
+
+    .main_color {
+        background: var(--mainColor);
+        color: var(--mainFontColor);
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        body {
+            --mainColor: red;
+            --mainFontColor: #FFF;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        body {
+            --mainColor: #000;
+            --mainFontColor: #FFF;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        body {
+            --mainColor: green;
+            --mainFontColor: #FFF;
+        }
+    }
+</style>
+
+</html>
