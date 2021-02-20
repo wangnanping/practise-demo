@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .top_bar {
+    height: 48px;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top_bar_left {
+    color: #FFF;
+    font-weight: bold;
+    padding: 0 30px;
+  }
+
+  .top_bar_right {
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signin_btn {
+    margin: 0 20px;
+  }
+
+  .dialog_warp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-wrapper {
+    width: 300px;
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .login-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  .close-btn {
+    cursor: pointer;
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+  }
+
+  .items {
+    padding-bottom: 10px;
+  }
+
+  .btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .confrim-btn {
+    margin-left: 10px;
+  }
+</style>
+
+<body>
+  <nav class="top_bar">
+    <div class="top_bar_left">
+      LOGO
+    </div>
+    <div class="top_bar_right">
+      <div class="login_btn">登录</div>
+      <div class="signin_btn">注册</div>
+    </div>
+  </nav>
+</body>
+<script>
+  window.onload = function () {
+    class Login {
+      constructor() {
+        this.init();
+      }
+
+      init() {
+        let dialog = document.createElement("div");
+        dialog.classList.add("dialog_warp");
+        dialog.innerHTML =
+          `
+            <div class="login-wrapper">
+              <div class="login-title">
+                <div class="title-text">登录框</div>
+                <div class="close-btn">×</div>
+              </div>
+              <div class="username-input user-input items">
+                <span class="login-text">用户名:</span>
+                <input type="text">
+              </div>
+              <div class="pwd-input user-input items">
+                <span class="login-text">密码:</span>
+                <input type="password">
+              </div>
+              <div class="btn-wrapper">
+                <button class="clear-btn">清空</button>
+                <button class="confrim-btn">确定</button>
+                
+              </div>
+            </div>
+          `;
+        document.body.insertBefore(dialog, document.body.childNodes[0]);
+
+        Login.closeLoginEvent()
+      }
+
+
+      static getDom(domName) {
+        return document.querySelector(domName)
+      }
+
+      static closeLoginEvent() {
+        this.getDom(".close-btn").addEventListener("click", () => {
+          this.getDom(".dialog_warp").style = "display:none";
+        })
+      }
+
+
+      static createInit() {
+        if (!this.instance) {
+          this.instance = new Login();
+        } else {
+          this.getDom(".dialog_warp").removeAttribute("style");
+        }
+        return this.instance;
+      }
+
+
+
+    }
+
+    Login.getDom(".login_btn").addEventListener('click', () => {
+      console.log("点击登录按钮");
+
+      Login.createInit();
+      Login.getDom(".title-text").innerHTML = "登录框";
+    })
+
+    Login.getDom(".signin_btn").addEventListener('click', () => {
+      console.log("点击注册按钮")
+
+      Login.createInit();
+      Login.getDom(".title-text").innerHTML = "注册框";
+    })
+  }
+</script>
+
+</html>
