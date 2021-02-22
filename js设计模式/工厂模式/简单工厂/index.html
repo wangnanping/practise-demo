@@ -46,6 +46,68 @@
   console.log(superAdmin.name);
   console.log(superAdmin.viewPage);
 
+  console.log("优化版本1----------------------");
+  const LimitsOne = function (role) {
+    switch (role) {
+      case "SuperAdmin":
+        let SuperAdmin = function () {
+          this.name = "超级管理员",
+            this.viewPage = ['首页', '通讯录', '发现页', '应用数据', '权限管理']
+        }
+        return new SuperAdmin();
+        break
+      case "Admin":
+        let Admin = function () {
+          this.name = "管理员",
+            this.viewPage = ['首页', '通讯录', '发现页', '应用数据']
+        }
+        return new Admin();
+        break
+      case "NormalUser":
+        let NormalUser = function () {
+          this.name = '普通用户',
+            this.viewPage = ['首页', '通讯录', '发现页']
+        }
+        return new NormalUser();
+        break
+      default:
+        throw new Error('参数错误, 可选参数:superAdmin、admin、user')
+    }
+  }
+
+  let SuperAdminOne = new LimitsOne("SuperAdmin");
+  console.log(SuperAdminOne.name);
+  console.log(SuperAdminOne.viewPage);
+
+
+  console.log("优化版本2----------------------");
+  const LimitsTwo = function (role) {
+
+    function getLimits(msg) {
+      this.name = msg.name;
+      this.viewPage = msg.viewPage
+    }
+
+
+    switch (role) {
+      case "SuperAdmin":
+        return new getLimits({ name: "超级管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据', '权限管理'] });
+        break
+      case "Admin":
+        return new getLimits({ name: "管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据'] });
+        break
+      case "NormalUser":
+        return new getLimits({ name: "普通用户", viewPage: ['首页', '通讯录', '发现页'] });
+        break
+      default:
+        throw new Error('参数错误, 可选参数:superAdmin、admin、user');
+    }
+  }
+
+  let SuperAdminTwo = new LimitsTwo("SuperAdmin");
+  console.log(SuperAdminTwo.name);
+  console.log(SuperAdminTwo.viewPage);
+
 </script>
 
 </html>
