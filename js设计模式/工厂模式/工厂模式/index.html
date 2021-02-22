@@ -12,10 +12,95 @@
 
 </body>
 <script>
-  //调用
+  // 根据简单工厂优化版本2看出，如果新增一种权限就需要修改两处地方 一个是新增一种权限和修改返回的getLimits函数
+
+  // 采用安全模式处理,在原型链上面添加角色
+  const LimitsTwo = function (role) {
+
+    if (this instanceof LimitsTwo) {
+      if (!this[role]) {
+        throw new Error(`参数错误, 当前角色(${role})不存在`);
+      }
+      let people = new this[role]();
+      return people;
+    } else {
+      return new LimitsTwo(role);
+    }
 
 
-  
+  }
+
+  LimitsTwo.prototype = {
+    SuperAdmin: function () {
+      this.name = "超级管理员";
+      this.viewPage = ['首页', '通讯录', '发现页', '应用数据', '权限管理'];
+    },
+    Admin: function () {
+      this.name = "管理员";
+      this.viewPage = ['首页', '通讯录', '发现页', '应用数据'];
+    },
+    NormalUser: function () {
+      this.name = "普通用户";
+      this.viewPage = ['首页', '通讯录', '发现页'];
+    }
+  }
+
+  let SuperAdminTwo = new LimitsTwo("SuperAdmin");
+  console.log(SuperAdminTwo.name);
+  console.log(SuperAdminTwo.viewPage);
+
+
+  LimitsTwo.prototype.Tourist = function () {
+    this.name = "游客";
+    this.viewPage = ['首页'];
+  }
+  let Tourist = new LimitsTwo("Tourist");
+  console.log(Tourist.name);
+  console.log(Tourist.viewPage);
+
+  // let Member = new LimitsTwo("Member");
+  // console.log(Member.name);
+
+
+  // 使用es6 
+  console.log("优化版本1  ES6----------------------");
+
+  class User {
+    constructor(role) {
+      if (new.target === User) {  // new.target指向直接被new执行的构造函数
+        throw new Error("抽象实例不能被实例化")
+      }
+      this.name = role.name;
+      this.viewPage = role.viewPage;
+    }
+  }
+
+  class LimitsThree1 extends User {
+
+    constructor(role) {
+      super(role)  // 可以通过super 来执行父类的方法
+    }
+
+    static judgeLimit(name) {
+      switch (name) {
+        case "SuperAdmin":
+          return new LimitsThree1({ name: "超级管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据', '权限管理'] });
+          break
+        case "Admin":
+          return new LimitsThree1({ name: "管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据'] });
+          break
+        case "NormalUser":
+          return new LimitsThree1({ name: "普通用户", viewPage: ['首页', '通讯录', '发现页'] });
+          break
+        default:
+          throw new Error('参数错误, 可选参数:superAdmin、admin、user');
+      }
+    }
+  }
+
+  let SuperAdmin3 = LimitsThree1.judgeLimit("SuperAdmin");
+  console.log(SuperAdmin3.name);
+  console.log(SuperAdmin3.viewPage);
 </script>
 
 </html>

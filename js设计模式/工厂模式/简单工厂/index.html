@@ -108,6 +108,36 @@
   console.log(SuperAdminTwo.name);
   console.log(SuperAdminTwo.viewPage);
 
+
+  // 使用es6 
+  console.log("优化版本3  ES6----------------------");
+  class LimitsThree {
+
+    constructor(role) {
+      this.name = role.name;
+      this.viewPage = role.viewPage;
+    }
+
+    static getLimits(name) {
+      switch (name) {
+        case "SuperAdmin":
+          return new LimitsThree({ name: "超级管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据', '权限管理'] });
+          break
+        case "Admin":
+          return new LimitsThree({ name: "管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据'] });
+          break
+        case "NormalUser":
+          return new LimitsThree({ name: "普通用户", viewPage: ['首页', '通讯录', '发现页'] });
+          break
+        default:
+          throw new Error('参数错误, 可选参数:superAdmin、admin、user');
+      }
+    }
+  }
+
+  let SuperAdminThree = LimitsThree.getLimits("SuperAdmin");
+  console.log(SuperAdminThree.name);
+  console.log(SuperAdminThree.viewPage);
 </script>
 
 </html>
