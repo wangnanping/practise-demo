@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  //调用
+
+
+  const Limits = function (role) {
+    switch (role) {
+      case "SuperAdmin":
+        let SuperAdmin = function () {
+          this.name = "超级管理员",
+            this.viewPage = ['首页', '通讯录', '发现页', '应用数据', '权限管理']
+        }
+        return new SuperAdmin();
+        break
+      case "Admin":
+        let Admin = function () {
+          this.name = "管理员",
+            this.viewPage = ['首页', '通讯录', '发现页', '应用数据']
+        }
+        return new Admin();
+        break
+      case "NormalUser":
+        let NormalUser = function () {
+          this.name = '普通用户',
+            this.viewPage = ['首页', '通讯录', '发现页']
+        }
+        return new NormalUser();
+        break
+      default:
+        throw new Error('参数错误, 可选参数:superAdmin、admin、user')
+    }
+  }
+
+  const SuperAdmin = new Limits("SuperAdmin");
+  console.log(SuperAdmin.name);
+  console.log(SuperAdmin.viewPage);
+
+
+  console.log("优化版本----------------------");
+  const LimitsTwo = function (role) {
+
+    function getLimits(msg) {
+      this.name = msg.name;
+      this.viewPage = meg.viewPage
+    }
+
+
+    switch (role) {
+      case "SuperAdmin":
+        return new this.getLimits({ name: "超级管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据', '权限管理'] });
+        break
+      case "Admin":
+        return new this.getLimits({ name: "管理员", viewPage: ['首页', '通讯录', '发现页', '应用数据'] });
+        break
+      case "NormalUser":
+        return new this.getLimits({ name: "普通用户", viewPage: ['首页', '通讯录', '发现页'] });
+        break
+      default:
+        throw new Error('参数错误, 可选参数:superAdmin、admin、user');
+    }
+  }
+
+  const SuperAdminTwo = new Limits("SuperAdmin");
+  console.log(SuperAdminTwo.name);
+  console.log(SuperAdminTwo.viewPage);
+</script>
+
+</html>
