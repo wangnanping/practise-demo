@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 // 例子 用类装饰器重现
 // https://www.jianshu.com/p/022988da4dc1?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 // 类装饰器声明：
@@ -85,7 +88,7 @@ console.log(p1.name);
 // target: Object - 被装饰的类
 // propertyKey: string | symbol - 方法名
 // descriptor: TypePropertyDescript - 属性描述符
-function LogOutput(tarage, key, descriptor) {
+function LogOutputs(tarage, key, descriptor) {
     var originalMethod = descriptor.value;
     var newMethod = function () {
         var args = [];
@@ -108,12 +111,13 @@ function LogOutput(tarage, key, descriptor) {
 }
 var Calculator = /** @class */ (function () {
     function Calculator() {
+        this.loggedOutput = 4;
     }
     Calculator.prototype.double = function (num) {
         return num * 2;
     };
     __decorate([
-        LogOutput
+        LogOutputs
     ], Calculator.prototype, "double", null);
     return Calculator;
 }());
@@ -121,3 +125,27 @@ var calc = new Calculator();
 calc.double(11);
 // console ouput: [{method: "double", output: 22, ...}]
 console.log(calc.loggedOutput);
+// -------------------------------------------------------------------------------------------------------------
+// 参数装饰器
+// 参数装饰器声明：
+// declare type ParameterDecorator = (target: Object, propertyKey: string | symbol,
+//   parameterIndex: number ) => void
+// 参数装饰器顾名思义，是用来装饰函数参数，它接收三个参数：
+// target: Object - 被装饰的类
+// propertyKey: string | symbol - 方法名
+// parameterIndex: number - 方法中参数的索引值
+function Log(target, key, parameterIndex) {
+    var functionLogged = key || target.prototype.constructor.name;
+    console.log("The parameter in position " + parameterIndex + " at " + functionLogged + " has\n been decorated");
+}
+var Greeters = /** @class */ (function () {
+    function Greeters(phrase) {
+        this.greeting = phrase;
+    }
+    Greeters = __decorate([
+        __param(0, Log)
+    ], Greeters);
+    return Greeters;
+}());
+// console output: The parameter in position 0
+// at Greeter has been decorated

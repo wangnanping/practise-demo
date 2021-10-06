@@ -28,5 +28,26 @@
     let cat = new Cat();
     cat.says(); // 属性为：cat
     // ES6的继承机制，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。
+
+
+    // 如何设置class 私有方法
+
+    const bar = Symbol('bar');
+    const snaf = Symbol('snaf');
+
+    class My{
+        
+        // 公有方法
+        foo(baz){
+            this[bar](baz);
+        }
+
+        // 私有方法  // 第三发无法访问 
+        [bar](baz){
+            return this[snaf] = baz;
+        }
+    }
+
+  
 </script>
 </html>
